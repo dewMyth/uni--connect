@@ -1,0 +1,90 @@
+@font-face{
+    font-family: Campton;
+    src:url("/public/fonts/campton-bolddemo-webfont.woff");
+  }
+
+.content{
+      text-align: center;
+      margin-top: 50px;
+  }
+
+.connect-welcome{
+    font-family: Campton;
+    font-size: 20px;
+}
+
+.connect-text{
+    font-family: Lato,  Helvetica;
+    font-size : 16px;
+    opacity: 0.5;
+}
+
+.logo-connect{
+   width: 120px;
+   margin: 30px 0 30px 0;
+}
+
+.input{
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height : 100%;
+    background-color: transparent;
+    border : 1px solid #8c2634;
+    border-radius: 80px;
+    
+}
+
+.input-username{
+    text-align: left;
+    border : 0;
+    outline: none;
+    background-color: transparent;
+    margin-left: 0px;
+    width: 90%;
+}
+
+.input-username:focus{
+    color: #8c2634;
+}
+
+.input-password{
+    text-align: left;
+    background-color: transparent;
+    border : 0;
+    outline: none;
+    margin-left: 0 px;
+    width : 90%;
+}
+
+.input-password:focus{
+    color: #8c2634;
+}
+
+
+.btn-primary {
+    width: 20%;
+    background-color: #8c2634;
+    border-radius: 80px;
+    font-family: Campton;
+    color: white;
+    border: #8c2634;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: #8c2634;
+    border: 1px solid #8c2634;
+}
+
+.f-pw{
+    font-family: Campton;
+    color: #8c2634;
+}
+
+
+@media screen and (max-width: 720px) {
+    .input {
+      width : 60%
+    }
+  }

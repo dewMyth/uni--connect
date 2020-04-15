@@ -1,0 +1,13 @@
+.bio{
+    text-align: center;
+    border-right: 1px solid #8c2634 ;
+}
+
+.page{
+    text-align: center;
+}
+
+.chat{
+    text-align: center;
+    border-left: 1px solid #8c2634;
+}

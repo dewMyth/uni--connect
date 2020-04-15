@@ -1,0 +1,9 @@
+@font-face{
+    font-family: Campton;
+    src:url("/public/fonts/campton-bolddemo-webfont.woff");
+  }
+
+a {
+    font-family: Campton;
+ color: #8c2634
+}
