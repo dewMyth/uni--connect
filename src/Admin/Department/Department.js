@@ -22,7 +22,7 @@ class Department extends Component{
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/faculties')
+        axios.get('/faculties')
             .then(response => {
                 if(response.data.length > 0) {
                     this.setState({
@@ -77,7 +77,7 @@ class Department extends Component{
             departmentDescription : ''
         });
 
-        axios.post('http://localhost:5000/departments/add' , department)
+        axios.post('/departments/add' , department)
         .then(res => console.log(res.data));
 
     }

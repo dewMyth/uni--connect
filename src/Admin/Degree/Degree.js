@@ -23,7 +23,7 @@ class Degree extends Component{
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/faculties')
+        axios.get('/faculties')
             .then(response => {
                 if(response.data.length > 0) {
                     this.setState({
@@ -33,7 +33,7 @@ class Degree extends Component{
                 }
             });
 
-            axios.get('http://localhost:5000/departments')
+            axios.get('/departments')
             .then(response => {
                 if(response.data.length > 0) {
                     this.setState({
@@ -89,7 +89,7 @@ class Degree extends Component{
             degreeDescription : ''
         });
 
-        axios.post('http://localhost:5000/degrees/add' , degree)
+        axios.post('/degrees/add' , degree)
         .then(res => console.log(res.data));
 
     }

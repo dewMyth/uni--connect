@@ -11,9 +11,9 @@ import Register from './Register/Register';
 import Login from './Login/Login';
 import PrivateRoute from './private-route/PrivateRoute';
 import Dashboard from './Dashboard/Dashboard';
-// import Faculty from '../Admin/Faculty/Faculty';
-// import Department from '../Admin/Department/Department';
-// import Degree from '../Admin/Degree/Degree';
+import Faculty from './Admin/Faculty/Faculty';
+import Department from './Admin/Department/Department';
+import Degree from './Admin/Degree/Degree';
 
 
 //Check for token to keep user logged in
@@ -48,9 +48,9 @@ class App extends Component {
             <Switch>
                 <PrivateRoute  exact path="/dashboard" component = { Dashboard }/>
             </Switch>
-      {/* //     <Route path="/admin/faculties" exact component = { Faculty } />
-      //     <Route path="/admin/departments" exact component = { Department } />
-      //     <Route path="/admin/degrees" exact component = { Degree } /> */}
+           <Route path="/admin/faculties" exact component = { Faculty } />
+           <Route path="/admin/departments" exact component = { Department } />
+           <Route path="/admin/degrees" exact component = { Degree } />
        </Router>
         </Provider>
     )

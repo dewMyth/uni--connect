@@ -10,6 +10,7 @@ const validateLoginInput = require("../validation/login");
 const User = require("../models/User");
 
 
+
 // @route POST users/register
 // @desc Register user
 // @access Public

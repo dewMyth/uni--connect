@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { registerUser } from '../actions/authActions';
+import { registerUser } from '../actions/authActions.js';
 import classnames from "classnames";
 import './Register.css'
 import axios from 'axios';
@@ -47,7 +47,7 @@ class Register extends Component {
             this.props.history.push("/dashboard");
         }
 
-        axios.get('http://localhost:5000/faculties')
+        axios.get('/faculties')
             .then(response => {
                 if(response.data.length > 0) {
                     this.setState({
@@ -57,7 +57,7 @@ class Register extends Component {
                 }
             });
 
-            axios.get('http://localhost:5000/departments')
+            axios.get('/departments')
             .then(response => {
                 if(response.data.length > 0) {
                     this.setState({
@@ -67,7 +67,7 @@ class Register extends Component {
                 }
             });
 
-            axios.get('http://localhost:5000/degrees')
+            axios.get('/degrees')
             .then(response => {
                 if(response.data.length > 0) {
                     this.setState({

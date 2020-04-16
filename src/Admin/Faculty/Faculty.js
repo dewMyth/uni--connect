@@ -54,7 +54,7 @@ class Faculty extends Component {
             facultyDescription : ''
         });
 
-        axios.post('http://localhost:5000/faculties/add' , faculty)
+        axios.post('/faculties/add' , faculty)
         .then(res => console.log(res.data));
     }
 
