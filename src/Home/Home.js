@@ -10,7 +10,6 @@ const Home = () => {
 
     <div className="container">
       <HomeNavBar />
-
       <div className="row">
 
         <div className="left col-md-6 col-xs-12">

@@ -3,6 +3,22 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination : function(req, file, cb){
+    cb(null, './uploads/');
+  },
+  filename : function(req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  }
+})
+
+const upload = multer({
+  storage: storage
+});
+
 // Load input validation
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
@@ -14,7 +30,9 @@ const User = require("../models/User");
 // @route POST users/register
 // @desc Register user
 // @access Public
-router.post("/register", (req, res) => {
+router.post("/register", upload.single('profilePicture'), (req, res) => {
+
+    console.log(req.file);
     // Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
