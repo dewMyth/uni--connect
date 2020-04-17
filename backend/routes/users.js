@@ -47,7 +47,7 @@ router.post("/register", upload.single('profilePicture'), (req, res) => {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           dateOfBirth: Date.parse(req.body.dateOfBirth),
-          profilePicture : req.body.profilePicture,
+          profilePicture : req.file.path,
           email: req.body.email,
           phone: req.body.phone,
           workPlaceOne : req.body.workPlaceOne,
