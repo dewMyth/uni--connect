@@ -170,254 +170,319 @@ class Register extends Component {
         const { errors } = this.state;
         return(
             <div className='container'>
-                <br />
+
+            <div className="logo">
+                <img src="images/logo.png" alt="logo" width="auto" height="60px" />
+                <p>A Social Network for Alumni of University of Kelaniya</p>
+            </div>
+
                 <form onSubmit= { this.onSubmit } encType="multipart/form-data" > 
-                    <div className="form-group">
-                        <input 
-                            className={classnames("",{ invalid: errors.firstName}, "form-control")}
-                            value={ this.state.firstName }
-                            onChange={ this.onChange }
-                            placeholder="First Name"
-                            error={errors.firstName}
-                            id="firstName"
-                            type="text"
-                        />
-                    </div>
-                    <span className="text-danger">{errors.firstName}</span>
+            <div className="row">
 
-                    <div className="form-group">
-                        <input 
-                            className={classnames("",{ invalid: errors.lastName}, "form-control")}
-                            value={ this.state.lastName }
-                            onChange={ this.onChange }
-                            placeholder="Last Name"
-                            error={errors.lastName}
-                            id="lastName"
-                            type="text"
-                        />
+                <div className="col-lg-6 col-sm-12" >
+
+                <div className="form-group">
+                        <div className="row">
+                            <input 
+                                    className={classnames("",{ invalid: errors.firstName}, "form-control")}
+                                    value={ this.state.firstName }
+                                    onChange={ this.onChange }
+                                    placeholder="First Name"
+                                    error={errors.firstName}
+                                    id="firstName"
+                                    type="text"
+                                />
+                            
+                        </div>
+                        <span className="text-danger">{errors.firstName}</span>
+                        </div>
+
+
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                className={classnames("",{ invalid: errors.lastName}, "form-control")}
+                                value={ this.state.lastName }
+                                onChange={ this.onChange }
+                                placeholder="Last Name"
+                                error={errors.lastName}
+                                id="lastName"
+                                type="text"
+                            />
+                        </div>
                         <span className="text-danger">{errors.lastName}</span>
-                    </div>
-                    <div className="form-group">
-                        <label>Date of Birth : </label>
-                        <DatePicker 
-                            className="form-control-date"
-                            selected = { this.state.dateOfBirth }
-                            onChange={ this.onChangeDate }
-                            id="dateOfBirth"
-                        />
-                    </div>
-                    <div className="form-group" >
-                        <input 
-                            className="form-control"
-                            onChange={this.onChangeProfilePicture}
-                            placeholder="Profile Picture"
-                            name="profilePicture"
-                            type="file"
-                        />
-                    </div>
+                        </div>
 
-                    <div className="form-group">
-                        <input 
-                            className={classnames("",{ invalid: errors.email}, "form-control")}
-                            value={ this.state.email }
-                            onChange={this.onChange}
-                            placeholder="Email"
-                            error={errors.email}
-                            id="email"
-                            type="email"
-                        />
-                    </div>
-                    <span className="text-danger">{errors.email}</span>
+                        <div className="form-group">
+                        <div className="row">
+                            <label>Date of Birth : </label>
+                            <DatePicker 
+                                className="form-control-date"
+                                selected = { this.state.dateOfBirth }
+                                onChange={ this.onChangeDate }
+                                id="dateOfBirth"
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <PhoneInput defaultCountry="LK"
-                            
-                            className={classnames("",{ invalid: errors.phone}, "form-control")}
-                            value={ this.state.phone }
-                            onChange={this.onChangePhone}
-                            placeholder="Phone"
-                            error={errors.phone}
-                            id="phone"
-                        />
-                    </div>
-                    <span className="text-danger">{errors.phone}</span>
+                        </div>
 
-                    <div className="form-group">
-                        <input 
-                            className={classnames("",{ invalid: errors.workPlaceOne}, "form-control")}
-                            value={ this.state.workPlaceOne }
-                            onChange={this.onChange}
-                            placeholder="Work Place 1"
-                            error={errors.workPlaceOne}
-                            id="workPlaceOne"
-                            type="text"
-                        />
-                    </div>
+                        <div className="form-group" >
+                        <div className="row">
+                            <input 
+                                className="form-control"
+                                onChange={this.onChangeProfilePicture}
+                                placeholder="Profile Picture"
+                                name="profilePicture"
+                                type="file"
+                            />
+                        </div>
+                        </div>
 
-                    <div className="form-group">
-                        <input 
-                            className="form-control"
-                            value={ this.state.workPlaceTwo }
-                            onChange={this.onChange}
-                            placeholder="Work Place 2"
-                            id="workPlaceTwo"
-                            type="text"
-                        />
-                    </div>
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                className={classnames("",{ invalid: errors.email}, "form-control")}
+                                value={ this.state.email }
+                                onChange={this.onChange}
+                                placeholder="Email"
+                                error={errors.email}
+                                id="email"
+                                type="email"
+                            />
+                        </div>
+                        </div>
+                        <span className="text-danger">{errors.email}</span>
 
-                    <div className="form-group">
-                    <input 
-                            className="form-control"
-                            value = { this.state.averageSalary}
-                            onChange={this.onChange}
-                            placeholder="Average Salary"
-                            id="averageSalary"
-                            type="number"
-                            
-                        />
-                    </div>
+                        <div className="form-group">
+                        <div className="row">
 
-                    <div className="form-group">
-                        <input 
-                            
-                            className={classnames("",{ invalid: errors.studentNo}, "form-control")}
-                            value={ this.state.studentNo }
-                            onChange={this.onChange}
-                            placeholder="Student No"
-                            error={errors.studentNo}
-                            id="studentNo"
-                        />
-                    </div>
-                    <span className="text-danger">{errors.studentNo}</span>
-
-                    <div className="form-group">
-                    <select
-                            required
-                            className={classnames("",{ invalid: errors.degree}, "form-control")}
-                            value={ this.state.degree }
-                            placeholder="Degree"
-                            error={errors.degree}
-                            id="degree"
-                            onChange={this.onChange }>
-                                                            {
-                                this.state.degrees.map(function(degree){
-                                    return < option
-                                        key={degree}
-                                        value={degree}>
-                                            {degree}
-                                            </option>
-                                })
-                            }
-
-                        </select>
-
-                    </div>
-                    <span className="text-danger">{errors.degree}</span>
+                            <PhoneInput defaultCountry="LK"
+                                
+                                className={classnames("",{ invalid: errors.phone}, "form-control")}
+                                value={ this.state.phone }
+                                onChange={this.onChangePhone}
+                                placeholder="Phone"
+                                error={errors.phone}
+                                id="phone"
+                            />
+                        </div>
+                        <span className="text-danger">{errors.phone}</span>
+                        </div>
 
 
-                    <div className="form-group">
-                    <select
-                            required
-                            className={classnames("",{ invalid: errors.department}, "form-control")}
-                            value={ this.state.department }
-                            placeholder="Department"
-                            error={errors.department}
-                            id="department"
-                            onChange={this.onChange}>
-                                                            {
-                                this.state.departments.map(function(department){
-                                    return < option
-                                        key={department}
-                                        value={department}>
-                                            {department}
-                                            </option>
-                                })
-                            }
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                className={classnames("",{ invalid: errors.workPlaceOne}, "form-control")}
+                                value={ this.state.workPlaceOne }
+                                onChange={this.onChange}
+                                placeholder="Work Place 1"
+                                error={errors.workPlaceOne}
+                                id="workPlaceOne"
+                                type="text"
+                            />
+                        </div>
+                        <span className="text-danger">{errors.workPlaceOne}</span>
+                        </div>
 
-                        </select>
-                    </div>
-                    <span className="text-danger">{errors.department}</span>
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                className="form-control"
+                                value={ this.state.workPlaceTwo }
+                                onChange={this.onChange}
+                                placeholder="Work Place 2"
+                                id="workPlaceTwo"
+                                type="text"
+                            />
+                        </div>
+                        </div>
 
-                    <div className="form-group">
-                        <select
-                            required
-                            className={classnames("",{ invalid: errors.faculty}, "form-control")}
-                            value={ this.state.faculty }
-                            placeholder="Faculty"
-                            error={errors.faculty}
-                            id="faculty"
-                            onChange={this.onChange}>
-                                                            {
-                                this.state.faculties.map(function(faculty){
-                                    return < option
-                                        key={faculty}
-                                        value={faculty}>
-                                            {faculty}
-                                            </option>
-                                })
-                            }
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                className="form-control"
+                                value = { this.state.averageSalary}
+                                onChange={this.onChange}
+                                placeholder="Average Salary"
+                                id="averageSalary"
+                                type="number" 
+                            />
+                        </div>
+                        </div>
 
-                        </select>        
-                    </div>
-                    <span className="text-danger">{errors.faculty}</span>
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                className={classnames("",{ invalid: errors.studentNo}, "form-control")}
+                                value={ this.state.studentNo }
+                                onChange={this.onChange}
+                                placeholder="Student No"
+                                error={errors.studentNo}
+                                id="studentNo"
+                            />
+                        </div>
+                        <span className="text-danger">{errors.studentNo}</span>
+                        </div>
 
-                    <div className="form-group">
-                        <textarea
-                            className="form-control"
-                            value={ this.state.bio}
-                            onChange={this.onChange}
-                            id="bio"
-                            placeholder="Bio"
-                        />
-                    </div>
 
-                    <div className="form-group">
-                        <input 
-                            type='text'
-                            className="form-control"
-                            value={ this.state.yearOfLeave}
-                            onChange={this.onChange}
-                            id="yearOfLeave"
-                            placeholder="Year of Leave"
-                        />
-                    </div>
 
-                    <div className="form-group">
-                        <input 
-                            className={classnames("",{ invalid: errors.password}, "form-control")}
-                            type = 'password'
-                            value={ this.state.password }
-                            onChange={this.onChange }
-                            error={errors.password}
-                            placeholder="Password"
-                            id="password"
-                        />
-                    </div>
-                    <span className="text-danger">{errors.password}</span>
+                </div>
+                <div className="col-lg-6 col-sm-12 right">
 
-                    <div className="form-group">
-                        <input 
-                            className={classnames("",{ invalid: errors.password2}, "form-control")}
-                            type = 'password'
-                            value={ this.state.password2 }
-                            onChange={this.onChange }
-                            error={errors.password2}
-                            placeholder="Confirm Password"
-                            id="password2"
-                        />
-                    </div>
-                    <span className="text-danger">{errors.password2}</span>
+                <div className="form-group">
+                        <div className="row">
+                            <select
+                                required
+                                className={classnames("",{ invalid: errors.degree}, "form-control")}
+                                value={ this.state.degree }
+                                placeholder="Degree"
+                                error={errors.degree}
+                                id="degree"
+                                onChange={this.onChange }>
+                                                                {
+                                    this.state.degrees.map(function(degree){
+                                        return < option
+                                            key={degree}
+                                            value={degree}>
+                                                {degree}
+                                                </option>
+                                    })
+                                }
+                            </select>
+                        </div>
+                        <span className="text-danger">{errors.degree}</span>
+                        </div>
 
-                    <div className="form-group">
-                        <input 
-                            type="submit"
-                            value="Join"
-                            className="btn btn-primary"
-                        />
-                    </div>
+
+
+                        <div className="form-group">
+                        <div className="row">
+                            <select
+                                    required
+                                    className={classnames("",{ invalid: errors.department}, "form-control")}
+                                    value={ this.state.department }
+                                    placeholder="Department"
+                                    error={errors.department}
+                                    id="department"
+                                    onChange={this.onChange}>
+                                                                    {
+                                        this.state.departments.map(function(department){
+                                            return < option
+                                                key={department}
+                                                value={department}>
+                                                    {department}
+                                                    </option>
+                                        })
+                                    }
+
+                            </select>
+                        </div>
+                        <span className="text-danger">{errors.department}</span>
+                        </div>
+
+
+                        <div className="form-group">
+                        <div className="row">
+                            <select
+                                required
+                                className={classnames("",{ invalid: errors.faculty}, "form-control")}
+                                value={ this.state.faculty }
+                                placeholder="Faculty"
+                                error={errors.faculty}
+                                id="faculty"
+                                onChange={this.onChange}>
+                                                                {
+                                    this.state.faculties.map(function(faculty){
+                                        return < option
+                                            key={faculty}
+                                            value={faculty}>
+                                                {faculty}
+                                                </option>
+                                    })
+                                }
+                            </select>        
+                        </div>
+                        <span className="text-danger">{errors.faculty}</span>
+                        </div>
+
+                        <div className="form-group">
+                        <div className="row">
+                            <textarea
+                                className="form-control"
+                                value={ this.state.bio}
+                                onChange={this.onChange}
+                                id="bio"
+                                placeholder="Bio"
+                            />
+                        </div>
+                        </div>
+
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                type='text'
+                                className="form-control"
+                                value={ this.state.yearOfLeave}
+                                onChange={this.onChange}
+                                id="yearOfLeave"
+                                placeholder="Year of Leave"
+                            />
+                        </div>
+                        </div>
+
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                className={classnames("",{ invalid: errors.password}, "form-control")}
+                                type = 'password'
+                                value={ this.state.password }
+                                onChange={this.onChange }
+                                error={errors.password}
+                                placeholder="Password"
+                                id="password"
+                            />
+                        </div>
+                        <span className="text-danger">{errors.password}</span>
+                        </div>
+
+
+                        <div className="form-group">
+                        <div className="row">
+                            <input 
+                                className={classnames("",{ invalid: errors.password2}, "form-control")}
+                                type = 'password'
+                                value={ this.state.password2 }
+                                onChange={this.onChange }
+                                error={errors.password2}
+                                placeholder="Confirm Password"
+                                id="password2"
+                            />
+                        </div>
+                        <span className="text-danger">{errors.password2}</span>
+                        </div>
+
+                    
+                        <div className="form-group">
+                            <div className="button">
+                                <input 
+                                    type="submit"
+                                    value="Join"
+                                    className="btn btn-primary"
+                                    id = "join"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <p>Already have an account? <a href="/login" className="join-now-text">Connect Now</a></p>
+                        </div>
+                    
+
+
+                        </div>
+                        </div>
                 </form>
-    
-
             </div>
         )
     }
