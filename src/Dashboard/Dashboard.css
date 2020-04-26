@@ -11,3 +11,20 @@
     text-align: center;
     border-left: 1px solid #8c2634;
 }
+
+.logout{
+ width: 100%;
+}
+
+p{
+    font-size: 13px;
+}
+
+.profile-pic-row{
+    align-items: center;
+}
+
+#profpic{
+    text-align: center;
+    border-radius: 50%;
+}

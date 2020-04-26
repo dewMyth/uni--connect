@@ -30,7 +30,6 @@ class Register extends Component {
             department : '',
             faculty : '',
             bio : '',
-            yearofLeave : '',
             password : '',
             password2 : '',
             errors : {},
@@ -134,7 +133,6 @@ class Register extends Component {
         newUser.set('department', this.state.department);
         newUser.set('faculty', this.state.faculty);
         newUser.set('bio', this.state.bio);
-        newUser.set('yearOfLeave', this.state.yearOfLeave);
         newUser.set('password', this.state.password);
         newUser.set('password2', this.state.password2);    
 
@@ -154,7 +152,6 @@ class Register extends Component {
         //     department : this.state.department,
         //     faculty : this.state.faculty,
         //     bio : this.state.bio,
-        //     yearOfLeave : this.state.yearOfLeave,
         //     password : this.state.password,
         //     password2 : this.state.password2
         // }
@@ -311,7 +308,14 @@ class Register extends Component {
                         </div>
                         </div>
 
-                        <div className="form-group">
+
+
+
+
+                </div>
+                <div className="col-lg-6 col-sm-12 right">
+
+                <div className="form-group">
                         <div className="row">
                             <input 
                                 className={classnames("",{ invalid: errors.studentNo}, "form-control")}
@@ -324,11 +328,6 @@ class Register extends Component {
                         </div>
                         <span className="text-danger">{errors.studentNo}</span>
                         </div>
-
-
-
-                </div>
-                <div className="col-lg-6 col-sm-12 right">
 
                 <div className="form-group">
                         <div className="row">
@@ -418,18 +417,6 @@ class Register extends Component {
                         </div>
                         </div>
 
-                        <div className="form-group">
-                        <div className="row">
-                            <input 
-                                type='text'
-                                className="form-control"
-                                value={ this.state.yearOfLeave}
-                                onChange={this.onChange}
-                                id="yearOfLeave"
-                                placeholder="Year of Leave"
-                            />
-                        </div>
-                        </div>
 
                         <div className="form-group">
                         <div className="row">

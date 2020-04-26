@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 import "./Dashboard.css"
+import NavBar from "../NavBar/NavBar"
+
+
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -13,14 +16,19 @@ render() {
     console.log(user);
         return(
             <div className="container">
-                <b>Hey There, </b> {user.firstName}{user.profilePicture}
-                <button onClick={ this.onLogoutClick }>Log out</button>
-                <div className="navbar">
-                  Navigation Bar
-                </div>
+
+                      <NavBar />
+
                 <div className="row">
                   <div className="bio col-md-2">
-                    Left - Profile's Details
+                    <div className="profile-pic-row">
+                      <img id="profpic" src={user.profilePicture} width="auto" height="100px" alt="No pic"/>
+                    </div>
+                    
+                    <b>{user.firstName} {user.lastName}</b>
+                    <p>{user.degree}</p>
+                    <p>{user.department}</p>
+                    <button onClick={ this.onLogoutClick } className="logout btn btn-primary" >Log out</button>
                   </div>
                   <div className="page col-md-8">
                     Center - Page

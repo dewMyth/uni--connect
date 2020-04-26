@@ -38,6 +38,9 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
+//making Uploads folder public
+app.use('/uploads',express.static('uploads'));
+
 // Routes
 app.use("/users", users);
 app.use("/degrees", degrees)
