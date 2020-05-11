@@ -65,25 +65,23 @@ class Faculty extends Component {
                     <div className="form-group">
                         <input 
                             required
-                            className="form-Control"
+                            className="dg form-control"
                             placeholder = "Title"
                             value = { this.state.facultyTitle }
                             onChange = { this.onChangeFacultyTitle}
                         />
                         <br />
-                        <br />
                         <input 
                             required
-                            className="form-Control"
+                            className="dg form-control"
                             placeholder = "Image"
                             value = { this.state.facultyImage }
                             onChange = { this.onChangeFacultyImage}
                         />
                         <br />
-                        <br />
                         <input 
                             required
-                            className="form-Control"
+                            className="form-control"
                             placeholder = "Description"
                             value = { this.state.facultyDescription }
                             onChange = {this.onChangeFacultyDescription }

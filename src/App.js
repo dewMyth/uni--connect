@@ -14,6 +14,7 @@ import Dashboard from './Dashboard/Dashboard';
 import Faculty from './Admin/Faculty/Faculty';
 import Department from './Admin/Department/Department';
 import Degree from './Admin/Degree/Degree';
+import Admin from './Admin/Admin';
 
 
 //Check for token to keep user logged in
@@ -48,6 +49,7 @@ class App extends Component {
             <Switch>
                 <PrivateRoute  exact path="/dashboard" component = { Dashboard }/>
             </Switch>
+           <Route path="/admin/" exact component = { Admin } />
            <Route path="/admin/faculties" exact component = { Faculty } />
            <Route path="/admin/departments" exact component = { Department } />
            <Route path="/admin/degrees" exact component = { Degree } />

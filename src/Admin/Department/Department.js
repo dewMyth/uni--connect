@@ -89,17 +89,16 @@ class Department extends Component{
                 <div className="form-group">
                     <input 
                         required
-                        className="form-Control"
+                        className="dg form-control"
                         placeholder = "Title"
                         value = { this.state.departmentTitle }
                         onChange = { this.onChangeDepartmentTitle }
                     />
                     <br />
-                    <br />
 
                     <select
                             required
-                            className="form-control"
+                            className="dg form-control"
                             value={ this.state.faculty }
                             placeholder="Faculty"
                             onChange={this.onChangeFaculty}>
@@ -115,20 +114,20 @@ class Department extends Component{
 
                         </select>
                         <br />
-                    <br />
+ 
                     <input 
                         required
-                        className="form-Control"
+                        className="dg form-control"
                         placeholder = "Image"
                         value = { this.state.departmentImage }
                         onChange = { this.onChangeDepartmentImage }
                     />
                     <br />
-                    <br />
+
                     <div>
                     <input 
                         required
-                        className="form-Control"
+                        className="form-control"
                         placeholder = "Description"
                         value = { this.state.departmentDescription }
                         onChange = {this.onChangeDepartmentDescription }

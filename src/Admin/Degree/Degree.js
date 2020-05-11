@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import "./Degree.css";
 
 class Degree extends Component{
     constructor(props){
@@ -101,17 +102,16 @@ class Degree extends Component{
                 <div className="form-group">
                     <input 
                         required
-                        className="form-Control"
+                        className="dg form-control"
                         placeholder = "Title"
                         value = { this.state.degreeTitle }
                         onChange = { this.onChangeDegreeTitle }
                     />
                     <br />
-                    <br />
 
                     <select
                             required
-                            className="form-control"
+                            className="dg form-control"
                             value={ this.state.faculty }
                             placeholder="Faculty"
                             onChange={this.onChangeFaculty}>
@@ -126,10 +126,9 @@ class Degree extends Component{
                             }
                         </select>
                         <br />
-                        <br />
                         <select
                             required
-                            className="form-control"
+                            className="dg form-control"
                             value={ this.state.department }
                             placeholder="Department"
                             onChange={this.onChangeDepartment}>
@@ -147,11 +146,11 @@ class Degree extends Component{
 
 
                     <br />
-                    <br />
+
                     <div>
-                    <input 
+                    <textarea
                         required
-                        className="form-Control"
+                        className="form-control"
                         placeholder = "Description"
                         value = { this.state.degreeDescription }
                         onChange = {this.onChangeDegreeDescription }
