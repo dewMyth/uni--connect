@@ -166,7 +166,6 @@ class Register extends Component {
     //     password2 : this.state.password2
     // }
 
-    console.log(newUser);
     this.props.registerUser(newUser, this.props.history);
   };
 
@@ -234,13 +233,16 @@ class Register extends Component {
 
               <div className="form-group">
                 <div className="reg row">
-                  <input
-                    className="form-control"
-                    onChange={this.onChangeProfilePicture}
-                    placeholder="Profile Picture"
-                    name="profilePicture"
-                    type="file"
-                  />
+                  <label className="label-profile-pic btn btn-primary">
+                    <input
+                      className="form-control"
+                      onChange={this.onChangeProfilePicture}
+                      placeholder="Profile Picture"
+                      name="profilePicture"
+                      type="file"
+                    />
+                    Add a Profile Picture
+                  </label>
                 </div>
               </div>
 

@@ -50,7 +50,7 @@ export default class NavBar extends Component {
               </li>
               <li className="nav-item">
                 <Link
-                  to={`/${this.props.user.id}`}
+                  to={`/profile/${this.props.user.id}`}
                   className="nav-link"
                   style={{ color: "#8c2634" }}
                 >

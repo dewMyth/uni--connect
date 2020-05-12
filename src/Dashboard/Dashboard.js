@@ -49,7 +49,10 @@ class Dashboard extends Component {
             <div className="page col-md-8">
               <Route path="/dashboard" exact component={Feed} />
               <Route path="/message" exact component={Message} />
-              <Route path="/:id" render={() => <Profile user={user} />} />
+              <Route
+                path="/profile/:id"
+                render={() => <Profile user={user} />}
+              />
             </div>
             <div className="chat col-md-2">Right - Chats Online</div>
           </div>

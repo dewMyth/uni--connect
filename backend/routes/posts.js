@@ -1,6 +1,22 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 
 const Post = require("../models/Post");
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+});
 
 router.route("/").get((req, res) => {
   Post.find()
@@ -8,15 +24,12 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error:" + err));
 });
 
-router.route("/add").post((req, res) => {
-  const postTitle = req.body.postTitle;
-  const postImage = req.body.postImage;
-  const postDescription = req.body.postDescription;
-
+router.post("/add", upload.single("postImage"), (req, res) => {
+  console.log(req.file);
   const newPost = new Post({
-    postTitle,
-    postImage,
-    postDescription,
+    postTitle: req.body.postTitle,
+    postImage: req.file.path,
+    postDescription: req.body.postDescription,
   });
 
   newPost
