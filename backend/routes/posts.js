@@ -20,16 +20,24 @@ const upload = multer({
 
 router.route("/").get((req, res) => {
   Post.find()
-    .then((posts) => res.json(posts))
+    .populate("postedBy", "_id firstName lastName profilePicture")
+    .select("")
+    .then((posts) => {
+      res.json(posts);
+    })
     .catch((err) => res.status(400).json("Error:" + err));
 });
 
 router.post("/add", upload.single("postImage"), (req, res) => {
-  console.log(req.file);
+  // console.log(req.file);
+  console.log(req.body.user);
   const newPost = new Post({
     postTitle: req.body.postTitle,
     postImage: req.file.path,
     postDescription: req.body.postDescription,
+    postedBy: req.body.user,
+
+    // postedBy: req.profile,
   });
 
   newPost

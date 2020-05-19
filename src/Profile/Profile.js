@@ -1,10 +1,32 @@
 import React, { Component } from "react";
-// import axios from 'axios'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import EditProfile from "./EditProfile/EditProfile";
+import ViewProfile from "./ViewProfile/ViewProfile";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Profile extends Component {
   render() {
-    return <div>Profile Page of {this.props.user.firstName}</div>;
+    const { user } = this.props.auth;
+    return (
+      <Router>
+        <div>
+          <Link to={`/edit/${this.props.user.id}`}>Edit Profile</Link>
+          <Route
+            path="/profile/:id"
+            render={() => <ViewProfile user={user} />}
+          />
+          <Route path="/edit/:id" render={() => <EditProfile user={user} />} />
+        </div>
+      </Router>
+    );
   }
 }
 
-export default Profile;
+Profile.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(Profile);

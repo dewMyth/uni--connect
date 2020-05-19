@@ -30,12 +30,15 @@ class CreatePost extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    const { user } = this.props.auth;
     const newPost = new FormData();
 
     newPost.set("postTitle", this.state.postTitle);
-    newPost.append("postImage", this.state.postImage);
+    newPost.set("postImage", this.state.postImage);
     newPost.set("postDescription", this.state.postDescription);
-    newPost.set("user", this.props.auth);
+    // newPost.set("postedBy", user);
+    newPost.set("user", user.id);
+    console.log(user);
 
     axios
       .post("/posts/add", newPost)
@@ -49,8 +52,6 @@ class CreatePost extends Component {
   };
 
   render() {
-    // const { user } = this.props.auth;
-
     return (
       <div className="container">
         <form onSubmit={this.onSubmit} encType="multipart/form-data">

@@ -102,6 +102,8 @@ router.post("/login", (req, res) => {
           lastName: user.lastName,
           degree: user.degree,
           department: user.department,
+          faculty: user.faculty,
+          studentNo: user.studentNo
         };
         // Sign token
         jwt.sign(

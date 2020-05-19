@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("../models/User");
 
 const Schema = mongoose.Schema;
 
@@ -12,6 +13,14 @@ const PostSchema = new Schema({
   },
   postDescription: {
     type: String,
+  },
+  postedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+  },
+  created: {
+    type: Date,
+    default: Date.now,
   },
 });
 

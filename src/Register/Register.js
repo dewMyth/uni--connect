@@ -48,6 +48,7 @@ class Register extends Component {
     };
   }
 
+  //Life Cycle Methods
   componentDidMount() {
     //if logged in user navigates to Register page should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
@@ -83,8 +84,6 @@ class Register extends Component {
       }
     });
   }
-
-  //Life Cycle Methods
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {

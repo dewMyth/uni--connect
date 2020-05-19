@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Post.css";
 
 class Post extends Component {
   state = {
     posts: [],
+    users: [],
   };
 
   componentDidMount() {
@@ -17,22 +19,65 @@ class Post extends Component {
     });
   }
 
-  renderPosts = (posts) => (
-    <div>
-      {posts.map((post, index) => (
-        <div className="card shadow-sm" key={index} id="post-card">
-          <div className="card-body">
-            <h5 className="card-title">{post.postTitle}</h5>
-            <p className="card-text">{post.postDescription}</p>
-            <img className="card-img-top" src={post.postImage} alt="" />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+  renderPosts = (posts) => {
+    return (
+      <div>
+        {posts.map((post, index) => {
+          const posterId = post.postedBy ? post.postedBy._id : "No Id";
+          const posterFirstName = post.postedBy ? post.postedBy.firstName : "";
+          const posterLastName = post.postedBy ? post.postedBy.lastName : "";
+          const posterProfPic = post.postedBy
+            ? post.postedBy.profilePicture
+            : "";
+          console.log(posterId);
+          return (
+            <div className="card shadow-sm" key={index} id="post-card">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-6 col-xs-6">
+                    <h5 className="card-title">{post.postTitle}</h5>
+                  </div>
+                  <div className="col-md-4 col-xs-4">
+                    <Link
+                      to={`/profile/${posterId}`}
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        fontFamily: "Lato",
+                        textAlign: "right",
+                        lineHeight: "40px",
+                      }}
+                    >
+                      <p>{`${posterFirstName} ${posterLastName}`}</p>
+                    </Link>
+                  </div>
+                  <div className="col-md-2 col-xs-4 col">
+                    {" "}
+                    <img
+                      src={posterProfPic}
+                      alt=""
+                      width="45px"
+                      height="auto"
+                      style={{
+                        borderRadius: "50px",
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <p className="card-text">{post.postDescription}</p>
+                <img className="card-img-top" src={post.postImage} alt="" />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
 
   render() {
     const { posts } = this.state;
+
     return <div className="container">{this.renderPosts(posts)}</div>;
   }
 }

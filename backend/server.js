@@ -4,11 +4,11 @@ const bodyParser = require("body-parser");
 const app = express();
 const passport = require("passport");
 
-const users = require("./routes/users");
+const posts = require("./routes/posts");
 const degrees = require("./routes/degrees");
 const faculties = require("./routes/faculties");
 const departments = require("./routes/departments");
-const posts = require("./routes/posts");
+const users = require("./routes/users");
 
 // Bodyparser middleware
 app.use(
@@ -36,6 +36,7 @@ require("./config/passport")(passport);
 app.use("/uploads", express.static("uploads"));
 
 // Routes
+
 app.use("/users", users);
 app.use("/degrees", degrees);
 app.use("/faculties", faculties);
