@@ -6,12 +6,6 @@ import { registerUser } from "../actions/authActions.js";
 import classnames from "classnames";
 import "./Register.css";
 import axios from "axios";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-// import ReactCrop from 'react-image-crop';
-// import 'react-image-crop/dist/ReactCrop.css';
 
 class Register extends Component {
   constructor() {
@@ -20,31 +14,16 @@ class Register extends Component {
     this.state = {
       firstName: "",
       lastName: "",
-      dateOfBirth: new Date(),
       profilePicture: "",
       email: "",
-      phone: "",
+      jobPosition: "",
       workPlaceOne: "",
-      workPlaceTwo: "",
-      averageSalaray: "",
       studentNo: "",
       degree: "",
-      department: "",
-      faculty: "",
-      bio: "",
       password: "",
       password2: "",
       errors: {},
-      faculties: [],
-      departments: [],
       degrees: [],
-      src: null,
-      crop: {
-        unit: "%",
-        width: 30,
-        aspect: 1 / 1,
-      },
-      croppedImageUrl: null,
     };
   }
 
@@ -54,26 +33,6 @@ class Register extends Component {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
-
-    axios.get("/faculties").then((response) => {
-      if (response.data.length > 0) {
-        this.setState({
-          faculties: response.data.map((faculty) => faculty.facultyTitle),
-          facultyTitle: response.data[0].facultyTitle,
-        });
-      }
-    });
-
-    axios.get("/departments").then((response) => {
-      if (response.data.length > 0) {
-        this.setState({
-          departments: response.data.map(
-            (department) => department.departmentTitle
-          ),
-          departmentTitle: response.data[0].departmentTitle,
-        });
-      }
-    });
 
     axios.get("/degrees").then((response) => {
       if (response.data.length > 0) {
@@ -99,27 +58,9 @@ class Register extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  onChangeDate = (date) => {
-    this.setState({
-      dateOfBirth: date,
-    });
-  };
-
-  onChangePhone = (phone) => {
-    this.setState({
-      phone: phone,
-    });
-  };
-
   onChangeProfilePicture = (e) => {
     this.setState({
       profilePicture: e.target.files[0],
-    });
-  };
-
-  onChangeCrop = (crop) => {
-    this.setState({
-      crop: crop,
     });
   };
 
@@ -131,18 +72,12 @@ class Register extends Component {
 
     newUser.set("firstName", this.state.firstName);
     newUser.set("lastName", this.state.lastName);
-    newUser.set("dateOfBirth", this.state.dateOfBirth);
     newUser.append("profilePicture", this.state.profilePicture);
     newUser.set("email", this.state.email);
-    newUser.set("phone", this.state.phone);
+    newUser.set("jobPosition", this.state.jobPosition);
     newUser.set("workPlaceOne", this.state.workPlaceOne);
-    newUser.set("workPlaceTwo", this.state.workPlaceTwo);
-    newUser.set("averageSalary", this.state.averageSalary);
     newUser.set("studentNo", this.state.studentNo);
     newUser.set("degree", this.state.degree);
-    newUser.set("department", this.state.department);
-    newUser.set("faculty", this.state.faculty);
-    newUser.set("bio", this.state.bio);
     newUser.set("password", this.state.password);
     newUser.set("password2", this.state.password2);
 
@@ -220,18 +155,6 @@ class Register extends Component {
 
               <div className="form-group">
                 <div className="reg row">
-                  <label>Date of Birth : </label>
-                  <DatePicker
-                    className="form-control-date"
-                    selected={this.state.dateOfBirth}
-                    onChange={this.onChangeDate}
-                    id="dateOfBirth"
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <div className="reg row">
                   <label className="label-profile-pic btn btn-primary">
                     <input
                       className="form-control"
@@ -266,23 +189,21 @@ class Register extends Component {
 
               <div className="form-group">
                 <div className="reg row">
-                  <PhoneInput
-                    defaultCountry="LK"
+                  <input
                     className={classnames(
                       "",
-                      { invalid: errors.phone },
+                      { invalid: errors.jobPosition },
                       "form-control"
                     )}
-                    value={this.state.phone}
-                    onChange={this.onChangePhone}
-                    placeholder="Phone"
-                    error={errors.phone}
-                    id="phone"
+                    value={this.state.jobPosition}
+                    onChange={this.onChange}
+                    placeholder="Job Role"
+                    error={errors.jobPosition}
+                    id="jobPosition"
+                    type="text"
                   />
                 </div>
-                <span className="text-danger">{errors.phone}</span>
               </div>
-
               <div className="form-group">
                 <div className="reg row">
                   <input
@@ -300,32 +221,6 @@ class Register extends Component {
                   />
                 </div>
                 <span className="text-danger">{errors.workPlaceOne}</span>
-              </div>
-
-              <div className="form-group">
-                <div className="reg row">
-                  <input
-                    className="form-control"
-                    value={this.state.workPlaceTwo}
-                    onChange={this.onChange}
-                    placeholder="Work Place 2"
-                    id="workPlaceTwo"
-                    type="text"
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <div className="reg row">
-                  <input
-                    className="form-control"
-                    value={this.state.averageSalary}
-                    onChange={this.onChange}
-                    placeholder="Average Salary"
-                    id="averageSalary"
-                    type="number"
-                  />
-                </div>
               </div>
             </div>
             <div className="col-lg-6 col-sm-12 right">
@@ -372,72 +267,6 @@ class Register extends Component {
                   </select>
                 </div>
                 <span className="text-danger">{errors.degree}</span>
-              </div>
-
-              <div className="form-group">
-                <div className="reg row">
-                  <select
-                    required
-                    className={classnames(
-                      "",
-                      { invalid: errors.department },
-                      "form-control"
-                    )}
-                    value={this.state.department}
-                    placeholder="Department"
-                    error={errors.department}
-                    id="department"
-                    onChange={this.onChange}
-                  >
-                    {this.state.departments.map(function (department) {
-                      return (
-                        <option key={department} value={department}>
-                          {department}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-                <span className="text-danger">{errors.department}</span>
-              </div>
-
-              <div className="form-group">
-                <div className="reg row">
-                  <select
-                    required
-                    className={classnames(
-                      "",
-                      { invalid: errors.faculty },
-                      "form-control"
-                    )}
-                    value={this.state.faculty}
-                    placeholder="Faculty"
-                    error={errors.faculty}
-                    id="faculty"
-                    onChange={this.onChange}
-                  >
-                    {this.state.faculties.map(function (faculty) {
-                      return (
-                        <option key={faculty} value={faculty}>
-                          {faculty}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-                <span className="text-danger">{errors.faculty}</span>
-              </div>
-
-              <div className="form-group">
-                <div className="reg row">
-                  <textarea
-                    className="form-control"
-                    value={this.state.bio}
-                    onChange={this.onChange}
-                    id="bio"
-                    placeholder="Bio"
-                  />
-                </div>
               </div>
 
               <div className="form-group">

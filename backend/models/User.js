@@ -24,12 +24,16 @@ const UserSchema = new Schema({
   },
   phone: {
     type: String,
-    required: true,
   },
+
+  jobPosition: {
+    type: String,
+  },
+
   workPlaceOne: {
     type: String,
-    required: true,
   },
+
   workPlaceTwo: {
     type: String,
   },
@@ -46,11 +50,9 @@ const UserSchema = new Schema({
   },
   department: {
     type: String,
-    required: true,
   },
   faculty: {
     type: String,
-    required: true,
   },
   bio: {
     type: String,

@@ -63,3 +63,20 @@ export const logoutUser = () => (dispatch) => {
   // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };
+
+//Update User
+export const updateUser = (userData, history) => (dispatch) => {
+  axios
+    .post("/users/update/:id", userData)
+    .then((res) => {
+      history.push("/dashboard");
+      alert("User Updated!");
+      console.log(res);
+    }) // re-direct to login on successful register
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};

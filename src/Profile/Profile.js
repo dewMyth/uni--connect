@@ -14,9 +14,14 @@ class Profile extends Component {
           <Link to={`/edit/${this.props.user.id}`}>Edit Profile</Link>
           <Route
             path="/profile/:id"
+            exact
             render={() => <ViewProfile user={user} />}
           />
-          <Route path="/edit/:id" render={() => <EditProfile user={user} />} />
+          <Route
+            path="/edit/:id"
+            exact
+            render={() => <EditProfile user={user} />}
+          />
         </div>
       </Router>
     );

@@ -6,14 +6,12 @@ import "./Dashboard.css";
 import NavBar from "../NavBar/NavBar";
 import Feed from "../Feed/Feed";
 import Profile from "../Profile/Profile";
-import Message from "../Message/Message";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import Chat from "../Chat/Chat";
+import Sidebar from "../elements/Sidebar/Sidebar";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PrivateRoute from "../private-route/PrivateRoute";
 
 class Dashboard extends Component {
-  onLogoutClick = (e) => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
   render() {
     const { user } = this.props.auth;
     console.log(user);
@@ -23,36 +21,15 @@ class Dashboard extends Component {
           <NavBar user={user} />
 
           <div className="row">
-            <div className="bio col-md-2">
-              <div className="profile-pic-row">
-                <img
-                  id="profpic"
-                  src={user.profilePicture}
-                  width="auto"
-                  height="100px"
-                  alt="No pic"
-                />
-              </div>
-
-              <b>
-                {user.firstName} {user.lastName}
-              </b>
-              <p>{user.degree}</p>
-              <p>{user.department}</p>
-              <button
-                onClick={this.onLogoutClick}
-                className="logout btn btn-primary"
-              >
-                Log out
-              </button>
-            </div>
+            <Sidebar />
             <div className="page col-md-8">
               <Route path="/dashboard" exact component={Feed} />
-              <Route path="/message" exact component={Message} />
+              <Route path="/chat" exact component={Chat} />
               <Route
                 path="/profile/:id"
+                exact
                 render={() => <Profile user={user} />}
-              />
+              />{" "}
             </div>
             <div className="chat col-md-2">Right - Chats Online</div>
           </div>

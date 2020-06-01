@@ -1,4 +1,5 @@
 const express = require("express");
+const _ = require("lodash");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -8,7 +9,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads/");
+    cb(null, "./uploads/prof_pics");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -29,7 +30,7 @@ const User = require("../models/User");
 // @desc Register user
 // @access Public
 router.post("/register", upload.single("profilePicture"), (req, res) => {
-  console.log(req.file);
+  // console.log(req.file);
   // Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
@@ -43,18 +44,12 @@ router.post("/register", upload.single("profilePicture"), (req, res) => {
       const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        dateOfBirth: Date.parse(req.body.dateOfBirth),
         profilePicture: req.file.path,
         email: req.body.email,
-        phone: req.body.phone,
+        jobPosition: req.body.jobPosition,
         workPlaceOne: req.body.workPlaceOne,
-        workPlaceTwo: req.body.workPlaceTwo,
-        averageSalaray: req.body.averageSalaray,
         studentNo: req.body.studentNo,
         degree: req.body.degree,
-        department: req.body.department,
-        faculty: req.body.faculty,
-        bio: req.body.bio,
         password: req.body.password,
       });
       // Hash password before saving in database
@@ -103,7 +98,7 @@ router.post("/login", (req, res) => {
           degree: user.degree,
           department: user.department,
           faculty: user.faculty,
-          studentNo: user.studentNo
+          studentNo: user.studentNo,
         };
         // Sign token
         jwt.sign(
@@ -132,6 +127,20 @@ router.get("/:id", (req, res) => {
   User.findById(req.params.id)
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json("User not found"));
+});
+
+router.put("/:id", (req, res) => {
+  User.findById(req.params.id).then((user) => {
+    user = _.extend(user, req.body);
+    user.save((err) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Not Authorized",
+        });
+      }
+      res.json({ user });
+    });
+  });
 });
 
 module.exports = router;

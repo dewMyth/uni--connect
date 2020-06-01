@@ -41,7 +41,7 @@ export default class NavBar extends Component {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/message"
+                  to="/chat"
                   className="nav-link"
                   style={{ color: "#8c2634" }}
                 >
