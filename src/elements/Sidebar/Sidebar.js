@@ -21,12 +21,12 @@ class Sidebar extends Component {
             alt=""
           />
         </div>
-
         <b>
           {user.firstName} {user.lastName}
         </b>
+        <p>{user.jobPosition}</p>
         <p>{user.degree}</p>
-        <p>{user.department}</p>
+
         <button onClick={this.onLogoutClick} className="logout btn btn-primary">
           Log out
         </button>

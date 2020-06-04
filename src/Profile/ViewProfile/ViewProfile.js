@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Progress } from "reactstrap";
+
 import axios from "axios";
 
 class ViewProfile extends Component {
@@ -9,6 +11,7 @@ class ViewProfile extends Component {
     profilePicture: "",
     email: "",
     phone: "",
+    jobPosition: "",
     workPlaceOne: "",
     workPlaceTwo: "",
     averageSalaray: "",
@@ -31,6 +34,7 @@ class ViewProfile extends Component {
         profilePicture: response.data.profilePicture,
         email: response.data.email,
         phone: response.data.phone,
+        jobPosition: response.data.jobPosition,
         workPlaceOne: response.data.workPlaceOne,
         workPlaceTwo: response.data.workPlaceTwo,
         studentNo: response.data.studentNo,
@@ -46,6 +50,16 @@ class ViewProfile extends Component {
   render() {
     return (
       <div className="container">
+        <div>
+          <img
+            id="profpic"
+            src={this.state.profilePicture}
+            width="auto"
+            height="100px"
+            alt=""
+          />
+        </div>
+
         {/* Personal Information  */}
         <div className="card shadow-sm" id="post-card">
           <div className="card-body">
@@ -56,14 +70,18 @@ class ViewProfile extends Component {
             </div>
             <div className="card-subtitle">Name</div>
             <p className="card-text">
-              {this.state.firstName} {this.state.lastName}
+              <b>
+                {this.state.firstName} {this.state.lastName}
+              </b>
             </p>
-            <div className="card-subtitle">Degree</div>
-            <p className="card-text">{this.state.degree}</p>
-            <div className="card-subtitle">Department</div>
-            <p className="card-text">{this.state.department}</p>
-            <div className="card-subtitle">Faculty</div>
-            <p className="card-text">{this.state.faculty}</p>
+            <div className="card-subtitle">Email</div>
+            <p className="card-text">
+              <b>{this.state.email}</b>
+            </p>
+            <div className="card-subtitle">Contact No</div>
+            <p className="card-text">
+              <b>{this.state.phone}</b>
+            </p>
           </div>
         </div>
 
@@ -75,11 +93,17 @@ class ViewProfile extends Component {
                 <h5 className="card-title">Education</h5>
               </div>
             </div>
-            <div className="card-subtitle">School</div>
+            <div className="card-subtitle">University</div>
             <p className="card-text">
-              {this.state.firstName} {this.state.lastName}
+              Degree : <b>{this.state.degree}</b>
             </p>
-            <div className="card-subtitle">Degree</div>
+            <p className="card-text">
+              Department : <b>{this.state.department}</b>
+            </p>
+            <p className="card-text">
+              Faculty : <b>{this.state.faculty}</b>
+            </p>
+            <div className="card-subtitle">School</div>
             <p className="card-text">{this.state.degree}</p>
             <div className="card-subtitle">Department</div>
             <p className="card-text">{this.state.department}</p>
@@ -95,16 +119,16 @@ class ViewProfile extends Component {
                 <h5 className="card-title">Work</h5>
               </div>
             </div>
-            <div className="card-subtitle">School</div>
-            <p className="card-text">
-              {this.state.firstName} {this.state.lastName}
+            <div className="card-subtitle">Current Occupation</div>
+            <p className="card-text" style={{ fontSize: "15px" }}>
+              {this.state.jobPosition} at {this.state.workPlaceOne}
             </p>
+            <div>
+              <Progress color="success" value={75} />
+            </div>
             <div className="card-subtitle">Previous Job</div>
-            <p className="card-text">{this.state.workPlaceOne}</p>
+            <p className="card-text">{this.state.workPlaceTwo}</p>
             <div className="card-subtitle">Current Job</div>
-            <p className="card-text">{this.state.department}</p>
-            <div className="card-subtitle">Faculty</div>
-            <p className="card-text">{this.state.faculty}</p>
           </div>
         </div>
       </div>

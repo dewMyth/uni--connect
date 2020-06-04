@@ -73,8 +73,6 @@ class Degree extends Component {
 
     const degree = {
       degreeTitle: this.state.degreeTitle,
-      faculty: this.state.faculty,
-      department: this.state.department,
       degreeDescription: this.state.degreeDescription,
     };
 
@@ -82,8 +80,6 @@ class Degree extends Component {
 
     this.setState({
       degreeTitle: "",
-      faculty: "",
-      department: "",
       degreeDescription: "",
     });
 
@@ -102,40 +98,6 @@ class Degree extends Component {
               value={this.state.degreeTitle}
               onChange={this.onChangeDegreeTitle}
             />
-            <br />
-
-            <select
-              required
-              className="dg form-control"
-              value={this.state.faculty}
-              placeholder="Faculty"
-              onChange={this.onChangeFaculty}
-            >
-              {this.state.faculties.map(function (faculty) {
-                return (
-                  <option key={faculty} value={faculty}>
-                    {faculty}
-                  </option>
-                );
-              })}
-            </select>
-            <br />
-            <select
-              required
-              className="dg form-control"
-              value={this.state.department}
-              placeholder="Department"
-              onChange={this.onChangeDepartment}
-            >
-              {this.state.departments.map(function (department) {
-                return (
-                  <option key={department} value={department}>
-                    {department}
-                  </option>
-                );
-              })}
-            </select>
-
             <br />
 
             <div>

@@ -1,148 +1,157 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
-class Department extends Component{
-    constructor(props){
-        super(props);
+class Department extends Component {
+  constructor(props) {
+    super(props);
 
-        this.onChangeDepartmentTitle = this.onChangeDepartmentTitle.bind(this);
-        this.onChangeFaculty = this.onChangeFaculty.bind(this);
-        this.onChangeDepartmentImage = this.onChangeDepartmentImage.bind(this);
-        this.onChangeDepartmentDescription = this.onChangeDepartmentDescription.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeDepartmentTitle = this.onChangeDepartmentTitle.bind(this);
+    // this.onChangeFaculty = this.onChangeFaculty.bind(this);
+    this.onChangeDepartmentImage = this.onChangeDepartmentImage.bind(this);
+    this.onChangeDepartmentDescription = this.onChangeDepartmentDescription.bind(
+      this
+    );
+    this.onChangeDegree = this.onChangeDegree.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
+    this.state = {
+      departmentTitle: "",
+      departmentImage: "",
+      departmentDescription: "",
+      departments: [],
+      degreeList: [],
+      degreeId: "",
+    };
+  }
 
-        this.state = {
-            departmentTitle : '',
-            faculty : '',
-            departmentImage : '',
-            departmentDescription : '',
-            faculties : []
-        }
-    }
-
-    componentDidMount() {
-        axios.get('/faculties')
-            .then(response => {
-                if(response.data.length > 0) {
-                    this.setState({
-                        faculties : response.data.map(faculty => faculty.facultyTitle),
-                        facultyTitle : response.data[0].facultyTitle
-                    })
-                }
-            })
-    }
-
-    onChangeDepartmentTitle(e){
+  componentDidMount() {
+    axios.get("/departments").then((response) => {
+      if (response.data.length > 0) {
         this.setState({
-            departmentTitle : e.target.value
+          departments: response.data,
         });
-    }
+      }
+    });
+  }
 
-    onChangeFaculty(e){
-        this.setState({
-            faculty : e.target.value
-        });
-    }
+  onChangeDepartmentTitle(e) {
+    this.setState({
+      departmentTitle: e.target.value,
+    });
+  }
 
+  onChangeDepartmentImage(e) {
+    this.setState({
+      departmentImage: e.target.value,
+    });
+  }
 
-    onChangeDepartmentImage(e){
-        this.setState({
-            departmentImage : e.target.value
-        });
-    }
+  onChangeDepartmentDescription(e) {
+    this.setState({
+      departmentDescription: e.target.value,
+    });
+  }
 
-    onChangeDepartmentDescription(e){
-        this.setState({
-            departmentDescription : e.target.value
-        });
-    }
+  onChangeDegree = (e) => {
+    this.setState({
+      degrees: e.target.value,
+    });
+  };
 
-    onSubmit(e) {
-        e.preventDefault();
+  onSubmit(e) {
+    e.preventDefault();
+    alert(this.state.degree._id);
+    const department = {
+      departmentTitle: this.state.departmentTitle,
+      departmentImage: this.state.departmentImage,
+      departmentDescription: this.state.departmentDescription,
+      degrees: this.state.degree,
+    };
 
-        const department = {
-            departmentTitle: this.state.departmentTitle,
-            faculty: this.state.faculty,
-            departmentImage: this.state.departmentImage,
-            departmentDescription: this.state.departmentDescription
-        }
+    this.setState({
+      departmentTitle: "",
+      departmentImage: "",
+      departmentDescription: "",
+    });
+    console.log(department);
+    axios
+      .post("/departments/add", department)
+      .then((res) => console.log(res.data));
+  }
 
-        console.log(department);
-
-        this.setState({
-            departmentTitle: '',
-            faculty : '',
-            departmentImage: '',
-            departmentDescription : ''
-        });
-
-        axios.post('/departments/add' , department)
-        .then(res => console.log(res.data));
-
-    }
-
-    render(){
-        return(
-            <div className="container">
-            <form onSubmit={ this.onSubmit }>
-                <div className="form-group">
-                    <input 
-                        required
-                        className="dg form-control"
-                        placeholder = "Title"
-                        value = { this.state.departmentTitle }
-                        onChange = { this.onChangeDepartmentTitle }
-                    />
-                    <br />
-
-                    <select
-                            required
-                            className="dg form-control"
-                            value={ this.state.faculty }
-                            placeholder="Faculty"
-                            onChange={this.onChangeFaculty}>
-                                                            {
-                                this.state.faculties.map(function(faculty){
-                                    return < option
-                                        key={faculty}
-                                        value={faculty}>
-                                            {faculty}
-                                            </option>
-                                })
-                            }
-
-                        </select>
-                        <br />
- 
-                    <input 
-                        required
-                        className="dg form-control"
-                        placeholder = "Image"
-                        value = { this.state.departmentImage }
-                        onChange = { this.onChangeDepartmentImage }
-                    />
-                    <br />
-
-                    <div>
-                    <input 
-                        required
-                        className="form-control"
-                        placeholder = "Description"
-                        value = { this.state.departmentDescription }
-                        onChange = {this.onChangeDepartmentDescription }
-                    />
-
-                    </div>
-                </div>
-                <div className="form-group">
-                    <input type='submit' value="Add Department" className="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-
-        );
-    }
+  render() {
+    return (
+      <div className="container">
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <input
+              required
+              className="dg form-control"
+              placeholder="Title"
+              value={this.state.departmentTitle}
+              onChange={this.onChangeDepartmentTitle}
+            />
+            <br />
+            {/* <select
+              required
+              className="dg form-control"
+              value={this.state.faculty}
+              placeholder="Faculty"
+              onChange={this.onChangeFaculty}
+            >
+              {this.state.faculties.map(function (faculty, index1) {
+                return (
+                  <option key={index1} value={faculty}>
+                    {faculty}
+                  </option>
+                );
+              })}
+            </select> */}
+            <br />
+            <input
+              required
+              className="dg form-control"
+              placeholder="Image"
+              value={this.state.departmentImage}
+              onChange={this.onChangeDepartmentImage}
+            />
+            <br />
+            <div>
+              <input
+                required
+                className="form-control"
+                placeholder="Description"
+                value={this.state.departmentDescription}
+                onChange={this.onChangeDepartmentDescription}
+              />
+            </div>
+            <br /> <br />
+            <select
+              required
+              className="dg form-control"
+              value={this.state.degree}
+              onChange={this.onChangeDegree}
+            >
+              {this.state.degreeList.map(function (degree, index) {
+                return (
+                  <option key={index} value={degree}>
+                    {degree}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="form-group">
+            <input
+              type="submit"
+              value="Add Department"
+              className="btn btn-primary"
+            />
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default Department;

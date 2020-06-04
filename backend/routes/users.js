@@ -50,6 +50,8 @@ router.post("/register", upload.single("profilePicture"), (req, res) => {
         workPlaceOne: req.body.workPlaceOne,
         studentNo: req.body.studentNo,
         degree: req.body.degree,
+        department: req.body.department,
+        faculty: req.body.faculty,
         password: req.body.password,
       });
       // Hash password before saving in database
@@ -99,6 +101,7 @@ router.post("/login", (req, res) => {
           department: user.department,
           faculty: user.faculty,
           studentNo: user.studentNo,
+          jobPosition: user.jobPosition,
         };
         // Sign token
         jwt.sign(

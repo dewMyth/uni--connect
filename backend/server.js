@@ -3,20 +3,12 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const passport = require("passport");
-
 const posts = require("./routes/posts");
 const degrees = require("./routes/degrees");
 const faculties = require("./routes/faculties");
 const departments = require("./routes/departments");
 const users = require("./routes/users");
-
-// Bodyparser middleware
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
-app.use(bodyParser.json());
+const admins = require("./routes/admin");
 
 // DB Config
 const db = require("./config/keys").mongoURI;
@@ -36,6 +28,17 @@ require("./config/passport")(passport);
 app.use("/uploads", express.static("uploads"));
 
 // Routes
+
+app.use("/admin", admins);
+
+// Bodyparser middleware
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
+
+app.use(bodyParser.json());
 
 app.use("/users", users);
 app.use("/degrees", degrees);

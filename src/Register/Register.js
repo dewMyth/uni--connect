@@ -20,11 +20,21 @@ class Register extends Component {
       workPlaceOne: "",
       studentNo: "",
       degree: "",
+      selectedDegree: "",
+      department: "",
+      selectedDepartment: "",
+      faculty: "",
+      selectedFaculty: "",
       password: "",
       password2: "",
       errors: {},
       degrees: [],
+      departments: [],
+      faculties: [],
     };
+
+    this.input = React.createRef();
+    this.input2 = React.createRef();
   }
 
   //Life Cycle Methods
@@ -35,10 +45,17 @@ class Register extends Component {
     }
 
     axios.get("/degrees").then((response) => {
+      console.log(response.data);
       if (response.data.length > 0) {
         this.setState({
           degrees: response.data.map((degree) => degree.degreeTitle),
           degreeTitle: response.data[0].degreeTitle,
+          departments: response.data.map(
+            (degree) => degree.department.departmentTitle
+          ),
+          department: response.data[0].departmentTitle,
+          faculties: response.data.map((degree) => degree.faculty.facultyTitle),
+          faculty: response.data[0].facultyTitle,
         });
       }
     });
@@ -53,6 +70,20 @@ class Register extends Component {
   }
 
   //On Change Methods
+
+  onChangeSelect = (e) => {
+    const targetDegree = e.target.value;
+    const index = this.state.degrees.indexOf(targetDegree);
+    const targetDepartment = this.state.departments[index];
+    const targetFaculty = this.state.faculties[index];
+    this.input.current.value = targetDepartment;
+    this.input2.current.value = targetFaculty;
+    this.setState({
+      degree: targetDegree,
+      department: targetDepartment,
+      faculty: targetFaculty,
+    });
+  };
 
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
@@ -72,12 +103,14 @@ class Register extends Component {
 
     newUser.set("firstName", this.state.firstName);
     newUser.set("lastName", this.state.lastName);
-    newUser.append("profilePicture", this.state.profilePicture);
+    newUser.set("profilePicture", this.state.profilePicture);
     newUser.set("email", this.state.email);
     newUser.set("jobPosition", this.state.jobPosition);
     newUser.set("workPlaceOne", this.state.workPlaceOne);
     newUser.set("studentNo", this.state.studentNo);
     newUser.set("degree", this.state.degree);
+    newUser.set("department", this.state.department);
+    newUser.set("faculty", this.state.faculty);
     newUser.set("password", this.state.password);
     newUser.set("password2", this.state.password2);
 
@@ -99,6 +132,7 @@ class Register extends Component {
     //     password : this.state.password,
     //     password2 : this.state.password2
     // }
+    console.log(newUser);
 
     this.props.registerUser(newUser, this.props.history);
   };
@@ -155,13 +189,14 @@ class Register extends Component {
 
               <div className="form-group">
                 <div className="reg row">
-                  <label className="label-profile-pic btn btn-primary">
+                  <label className="btn btn-primary" style={{ width: "auto" }}>
                     <input
-                      className="form-control"
+                      // className="form-control"
                       onChange={this.onChangeProfilePicture}
                       placeholder="Profile Picture"
                       name="profilePicture"
                       type="file"
+                      style={{ width: "auto" }}
                     />
                     Add a Profile Picture
                   </label>
@@ -197,7 +232,7 @@ class Register extends Component {
                     )}
                     value={this.state.jobPosition}
                     onChange={this.onChange}
-                    placeholder="Job Role"
+                    placeholder="Current Occupation"
                     error={errors.jobPosition}
                     id="jobPosition"
                     type="text"
@@ -214,7 +249,7 @@ class Register extends Component {
                     )}
                     value={this.state.workPlaceOne}
                     onChange={this.onChange}
-                    placeholder="Work Place 1"
+                    placeholder="Job Place"
                     error={errors.workPlaceOne}
                     id="workPlaceOne"
                     type="text"
@@ -234,7 +269,7 @@ class Register extends Component {
                     )}
                     value={this.state.studentNo}
                     onChange={this.onChange}
-                    placeholder="Student No"
+                    placeholder="Student No used in University"
                     error={errors.studentNo}
                     id="studentNo"
                   />
@@ -255,7 +290,7 @@ class Register extends Component {
                     placeholder="Degree"
                     error={errors.degree}
                     id="degree"
-                    onChange={this.onChange}
+                    onChange={this.onChangeSelect}
                   >
                     {this.state.degrees.map(function (degree) {
                       return (
@@ -267,6 +302,28 @@ class Register extends Component {
                   </select>
                 </div>
                 <span className="text-danger">{errors.degree}</span>
+              </div>
+
+              <div className="form-group">
+                <div className="reg row">
+                  <input
+                    className="form-control"
+                    type="text"
+                    ref={this.input}
+                    defaultValue={this.state.departments[0]}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <div className="reg row">
+                  <input
+                    className="form-control"
+                    type="text"
+                    ref={this.input2}
+                    defaultValue={this.state.faculties[0]}
+                  />
+                </div>
               </div>
 
               <div className="form-group">

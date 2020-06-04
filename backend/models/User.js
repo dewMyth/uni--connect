@@ -54,6 +54,7 @@ const UserSchema = new Schema({
   faculty: {
     type: String,
   },
+
   bio: {
     type: String,
   },

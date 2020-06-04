@@ -26,6 +26,8 @@ class EditProfile extends Component {
       degree: "",
       department: "",
       faculty: "",
+      school: "",
+      alStream: "",
       bio: "",
       errors: {},
       faculties: [],
@@ -153,9 +155,8 @@ class EditProfile extends Component {
       degree: this.state.degree,
       department: this.state.department,
       faculty: this.state.faculty,
+      school: this.state.school,
       bio: this.state.bio,
-      password: this.state.password,
-      password2: this.state.password2,
     };
 
     axios
@@ -163,6 +164,8 @@ class EditProfile extends Component {
       .then((res) => console.log(res.data));
 
     window.location = "/dashboard";
+
+    console.log(newUser);
   };
 
   render() {
@@ -216,7 +219,10 @@ class EditProfile extends Component {
 
               <div className="form-group">
                 <div className="reg row">
-                  <label className="label-profile-pic btn btn-primary">
+                  <label
+                    className="label-profile-pic btn btn-primary"
+                    style={{ width: "auto" }}
+                  >
                     <input
                       className="form-control"
                       onChange={this.onChangeProfilePicture}
@@ -224,7 +230,7 @@ class EditProfile extends Component {
                       name="profilePicture"
                       type="file"
                     />
-                    Add a Profile Picture
+                    Edit Profile Picture
                   </label>
                 </div>
               </div>
@@ -396,6 +402,32 @@ class EditProfile extends Component {
                   </select>
                 </div>
                 <span className="text-danger">{errors.faculty}</span>
+              </div>
+
+              <div className="form-group">
+                <div className="reg row">
+                  <input
+                    className="form-control"
+                    value={this.state.school}
+                    onChange={this.onChange}
+                    placeholder="School"
+                    id="school"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <div className="reg row">
+                  <input
+                    className="form-control"
+                    value={this.state.alStream}
+                    onChange={this.onChange}
+                    placeholder="G.C.E A/L Stream"
+                    id="alStream"
+                    type="text"
+                  />
+                </div>
               </div>
 
               <div className="form-group">
