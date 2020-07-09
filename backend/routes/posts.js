@@ -21,7 +21,11 @@ const upload = multer({
 router.route("/").get((req, res) => {
   Post.find()
     .populate("postedBy", "_id firstName lastName profilePicture")
-    .select("")
+    .populate("comments.postedBy", "_id firstName lastName")
+    .select(
+      "_id postTitle postImage postDescription  postedBy created likes comments"
+    )
+    .sort({ created: -1 })
     .then((posts) => {
       res.json(posts);
     })
@@ -44,6 +48,94 @@ router.post("/add", upload.single("postImage"), (req, res) => {
     .save()
     .then(() => res.json("Post Added"))
     .catch((err) => res.status(400).json("Error : " + err));
+});
+
+//find Single Post using ID
+
+router.get("/:id", (req, res) => {
+  Post.findById(req.params.id)
+    .populate("postedBy", "_id firstName lastName profilePicture")
+    .populate("comments.postedBy", "_id firstName lastName")
+    .select(
+      "_id postTitle postImage postDescription  postedBy created likes comments"
+    )
+    .then((post) => res.json(post))
+    .catch((err) => res.status(400).json("Post not found" + err));
+});
+
+router.put("/like", (req, res) => {
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    { $push: { likes: req.body.userId } },
+    { new: true }
+  ).exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: err,
+      });
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+router.put("/unlike", (req, res) => {
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    { $pull: { likes: req.body.userId } },
+    { new: true }
+  ).exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: err,
+      });
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+router.put("/comment", (req, res) => {
+  let comment = req.body.comment;
+  comment.postedBy = req.body.userId;
+
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    { $push: { comments: comment } },
+    { new: true }
+  )
+    .populate("comments.postedBy", "_id firstName lastName")
+    .populate("postedBy", "_id firstName lastName")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: err,
+        });
+      } else {
+        res.json(result);
+      }
+    });
+});
+
+router.put("/uncomment", (req, res) => {
+  let comment = req.body.comment;
+
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    { $pull: { comments: { _id: comment._id } } },
+    { new: true }
+  )
+    .populate("comments.postedBy", "_id firstName lastName")
+    .populate("postedBy", "_id firstName lastName")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: err,
+        });
+      } else {
+        res.json(result);
+      }
+    });
 });
 
 module.exports = router;

@@ -15,6 +15,11 @@ import Faculty from "./Admin/Faculty/Faculty";
 import Department from "./Admin/Department/Department";
 import Degree from "./Admin/Degree/Degree";
 import Admin from "./Admin/Admin";
+import JavascriptTimeAgo from "javascript-time-ago";
+
+import en from "javascript-time-ago/locale/en";
+
+JavascriptTimeAgo.addLocale(en);
 
 //Check for token to keep user logged in
 if (localStorage.jwtToken) {

@@ -8,6 +8,8 @@ import Feed from "../Feed/Feed";
 import Profile from "../Profile/Profile";
 import Chat from "../Chat/Chat";
 import Sidebar from "../elements/Sidebar/Sidebar";
+import SinglePost from "../elements/SinglePost/SinglePost";
+import ChatOnline from "../elements/ChatOnline/ChatOnline";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class Dashboard extends Component {
@@ -29,9 +31,12 @@ class Dashboard extends Component {
                   exact
                   render={() => <Profile user={user} />}
                 />
+                <Route path="/posts/:id" exact component={SinglePost} />
               </Switch>
             </div>
-            <div className="chat col-md-2">Right - Chats Online</div>
+            <div className="chat col-md-2">
+              <ChatOnline />
+            </div>
           </div>
         </div>
       </Router>

@@ -443,23 +443,14 @@ class EditProfile extends Component {
               </div>
 
               <div className="form-group">
-                <div className="button">
+                <div className="button" style={{ textAlign: "left" }}>
                   <input
                     type="submit"
-                    value="Join"
+                    value="Save Changes"
                     className="btn btn-primary"
                     id="join"
                   />
                 </div>
-              </div>
-
-              <div className="reg row">
-                <p>
-                  Already have an account?{" "}
-                  <a href="/login" className="join-now-text">
-                    Connect Now
-                  </a>
-                </p>
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ const adminBro = new AdminBro({
   databases: [mongoose],
   rootPath: "/admin",
   branding: {
-    logo: "https://www.picturepaste.ca/images/2020/06/02/logo100.png",
+    logo: "https://www.picturepaste.ca/images/2020/06/11/logo.png",
     companyName: "",
     softwareBrothers: false,
   },

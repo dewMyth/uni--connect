@@ -146,4 +146,13 @@ router.put("/:id", (req, res) => {
   });
 });
 
+router.route("/").get((req, res) => {
+  User.find()
+    .select("")
+    .then((posts) => {
+      res.json(posts);
+    })
+    .catch((err) => res.status(400).json("Error:" + err));
+});
+
 module.exports = router;

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { Link } from "react-router-dom";
 
 class Sidebar extends Component {
   onLogoutClick = (e) => {
@@ -22,12 +23,27 @@ class Sidebar extends Component {
           />
         </div>
         <b>
-          {user.firstName} {user.lastName}
+          {user.firstName} {user.lastName}{" "}
         </b>
-        <p>{user.jobPosition}</p>
-        <p>{user.degree}</p>
+        <p style={{ fontSize: "10px" }}>
+          {user.jobPosition}
+          <br />
+          {user.degree}
+          <br />
+          {user.department}
+          <br />
+          {user.faculty}
+        </p>
 
-        <button onClick={this.onLogoutClick} className="logout btn btn-primary">
+        <Link to="/" path="">
+          Find Colleagues
+        </Link>
+
+        <button
+          onClick={this.onLogoutClick}
+          className="logout btn btn-primary btn-sm"
+          style={{ width: "50%" }}
+        >
           Log out
         </button>
       </div>

@@ -49,6 +49,8 @@ class CreatePost extends Component {
       .catch((error) => {
         console.log(error.message);
       });
+
+    // window.location.reload(true);
   };
 
   render() {

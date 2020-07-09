@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Post.css";
+import ReactTimeAgo from "react-time-ago";
 
 class Post extends Component {
   state = {
@@ -12,6 +13,7 @@ class Post extends Component {
   componentDidMount() {
     axios.get("/posts").then((response) => {
       if (response.data.length > 0) {
+        console.log(response.data);
         this.setState({
           posts: response.data,
         });
@@ -29,13 +31,18 @@ class Post extends Component {
           const posterProfPic = post.postedBy
             ? post.postedBy.profilePicture
             : "";
-          console.log(posterId);
+
           return (
             <div className="card shadow-sm" key={index} id="post-card">
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-6 col-xs-6">
-                    <h5 className="card-title">{post.postTitle}</h5>
+                    <Link to={`/posts/${post._id}`}>
+                      <h5 className="card-title">{post.postTitle}</h5>
+                    </Link>
+                    <i>
+                      <ReactTimeAgo date={post.created} locale="en" />
+                    </i>
                   </div>
                   <div className="col-md-4 col-xs-4">
                     <Link
@@ -64,7 +71,6 @@ class Post extends Component {
                     />
                   </div>
                 </div>
-
                 <p className="card-text">{post.postDescription}</p>
                 <img className="card-img-top" src={post.postImage} alt="" />
               </div>

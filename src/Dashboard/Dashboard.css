@@ -1,30 +1,36 @@
-.bio{
-    text-align: center;
-    border-right: 1px solid #8c2634 ;
+.bio {
+  text-align: center;
+  border-right: 1px solid #8c2634;
 }
 
-.page{
-    text-align: center;
+.page {
+  text-align: center;
 }
 
-.chat{
-    text-align: center;
-    border-left: 1px solid #8c2634;
+.chat {
+  text-align: center;
+  border-left: 1px solid #8c2634;
 }
 
-.logout{
- width: 100%;
+.logout {
+  width: 100%;
 }
 
-p{
-    font-size: 13px;
+p {
+  font-size: 13px;
 }
 
-.profile-pic-row{
-    align-items: center;
+.profile-pic-row {
+  align-items: center;
 }
 
-#profpic{
-    text-align: center;
-    border-radius: 50%;
+#profpic {
+  text-align: center;
+  border-radius: 50%;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1400px;
+  }
 }

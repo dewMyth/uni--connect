@@ -65,7 +65,7 @@ class ViewProfile extends Component {
           <div className="card-body">
             <div className="row">
               <div className="col-md-6 col-xs-6">
-                <h5 className="card-title">Perosnal Information</h5>
+                <h5 className="card-title">Personal Information</h5>
               </div>
             </div>
             <div className="card-subtitle">Name</div>
@@ -124,8 +124,13 @@ class ViewProfile extends Component {
               {this.state.jobPosition} at {this.state.workPlaceOne}
             </p>
             <div>
-              <Progress color="success" value={75} />
+              Salary Range ( 0 - 300, 000 LKR)
+              <Progress
+                color="success"
+                value={Math.floor(Math.random() * 100) + 1}
+              />
             </div>
+            <br /> <br />
             <div className="card-subtitle">Previous Job</div>
             <p className="card-text">{this.state.workPlaceTwo}</p>
             <div className="card-subtitle">Current Job</div>
