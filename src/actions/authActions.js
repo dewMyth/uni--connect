@@ -80,3 +80,26 @@ export const updateUser = (userData, history) => (dispatch) => {
       })
     );
 };
+
+//Reset Password
+export const resetPassword = (userData, history) => (dispatch) => {
+  console.log(userData);
+  axios
+    .post("/users/reset-password", userData)
+    .then((res) => {
+      alert("Email Sent!");
+      console.log(res);
+    }) // re-direct to login on successful reset password
+    .catch((err) => console.log(err));
+};
+
+//Update New Password
+export const newPassword = () => (userData) => {
+  axios
+    .post("/users/new-password", userData)
+    .then((res) => {
+      alert("Password Updated");
+      console.log(res);
+    })
+    .catch((err) => console.log(err));
+};

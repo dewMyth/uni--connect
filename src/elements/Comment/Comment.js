@@ -79,17 +79,17 @@ class Comment extends Component {
     const { error } = this.state;
     return (
       <div className="container">
-        <h2>Leave a Comment</h2>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              classname="form-control"
+          <div class="form-group">
+            <textarea
+              class="form-control"
               onChange={this.onChangeText}
               value={this.state.text}
-            />
+              rows="3"
+              placeholder="Leave a comment..."
+            ></textarea>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-login">
             Post
           </button>
         </form>
@@ -105,29 +105,34 @@ class Comment extends Component {
           <div className="card-body">
             <div className="card-title">
               <b>{comments.length} Comments</b>
+              <hr />
             </div>
-            <hr />
+
             {comments.map((comment, i) => (
-              <div key={i}>
+              <div className="row" key={i}>
                 <div className="col-md-6 col-xs-6">
                   <Link to="/dashboard">
                     <h5 className="card-subtitle">
                       {comment.postedBy.firstName} {comment.postedBy.lastName}
                     </h5>
                   </Link>
-                  <img
-                    src={comment.postedBy.profilePicture}
+
+                  {/* <img
+                    src={"/" + comment.postedBy.profilePicture}
                     width="40px"
                     height="auto"
                     alt="Not found"
-                  />
+                  /> */}
                   <i>
                     <p>{new Date(comment.created).toDateString()}</p>
                   </i>
                   <p style={{ fontSize: "15px" }}>{comment.text}</p>
                 </div>
 
-                <div>
+                <div
+                  className="col-md-6 col-xs-6"
+                  style={{ textAlign: "right" }}
+                >
                   {this.props.auth.user.id === comment.postedBy._id && (
                     <>
                       <span

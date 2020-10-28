@@ -38,7 +38,7 @@ class EditProfile extends Component {
 
   //Life Cycle Methods
   componentDidMount() {
-    axios.get("/users/" + this.props.user.id).then((response) => {
+    axios.get("/users/view/" + this.props.user.id).then((response) => {
       this.setState({
         firstName: response.data.firstName,
         lastName: response.data.lastName,
@@ -54,6 +54,7 @@ class EditProfile extends Component {
         faculty: response.data.faculty,
         department: response.data.department,
         bio: response.data.bio,
+        averageSalaray: response.data.averageSalaray,
       });
     });
 
@@ -157,10 +158,11 @@ class EditProfile extends Component {
       faculty: this.state.faculty,
       school: this.state.school,
       bio: this.state.bio,
+      averageSalaray: this.state.averageSalaray,
     };
 
     axios
-      .put("/users/" + this.props.user.id, newUser)
+      .put("/users/edit/" + this.props.user.id, newUser)
       .then((res) => console.log(res.data));
 
     window.location = "/dashboard";
@@ -172,6 +174,7 @@ class EditProfile extends Component {
     const { errors } = this.state;
     return (
       <div className="container">
+        {this.state.averageSalaray}
         <form onSubmit={this.onSubmit} encType="multipart/form-data">
           <div className="reg row">
             <div className="col-lg-6 col-sm-12">
@@ -311,10 +314,10 @@ class EditProfile extends Component {
                 <div className="reg row">
                   <input
                     className="form-control"
-                    value={this.state.averageSalary}
+                    value={this.state.averageSalaray}
                     onChange={this.onChange}
                     placeholder="Average Salary"
-                    id="averageSalary"
+                    id="averageSalaray"
                     type="number"
                   />
                 </div>
@@ -442,15 +445,22 @@ class EditProfile extends Component {
                 </div>
               </div>
 
-              <div className="form-group">
-                <div className="button" style={{ textAlign: "left" }}>
+              <div className="form-group" style={{ paddingRight: "70px" }}>
+                {/* <div className="button" style={{ textAlign: "left" }}>
                   <input
                     type="submit"
                     value="Save Changes"
                     className="btn btn-primary"
                     id="join"
                   />
-                </div>
+                </div> */}
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-register"
+                  id="join"
+                >
+                  Save Changes
+                </button>
               </div>
             </div>
           </div>

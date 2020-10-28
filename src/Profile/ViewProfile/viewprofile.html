@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <title>My CV</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- {/* Personal Information  */} -->
+      <div class="card shadow-sm" id="post-card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <h5 class="card-title">Personal Information</h5>
+            </div>
+          </div>
+          <div class="card-subtitle">Name</div>
+          <p class="card-text">
+            <b>
+              {this.state.firstName} {this.state.lastName}
+            </b>
+          </p>
+          <div class="card-subtitle">Email</div>
+          <p class="card-text">
+            <b>{this.state.email}</b>
+          </p>
+          <div class="card-subtitle">Contact No</div>
+          <p class="card-text">
+            <b>{this.state.phone}</b>
+          </p>
+        </div>
+      </div>
+
+      <!-- {/* Education */} -->
+      <div class="card shadow-sm" id="post-card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <h5 class="card-title">Education</h5>
+            </div>
+          </div>
+          <div class="card-subtitle">University</div>
+          <p class="card-text">Degree : <b>{this.state.degree}</b></p>
+          <p class="card-text">Department : <b>{this.state.department}</b></p>
+          <p class="card-text">Faculty : <b>{this.state.faculty}</b></p>
+          <div class="card-subtitle">School</div>
+          <p class="card-text">{this.state.degree}</p>
+          <div class="card-subtitle">Department</div>
+          <p class="card-text">{this.state.department}</p>
+          <div class="card-subtitle">Faculty</div>
+          <p class="card-text">{this.state.faculty}</p>
+        </div>
+      </div>
+      <!-- {/* Work */} -->
+      <div class="card shadow-sm" id="post-card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <h5 class="card-title">Work</h5>
+            </div>
+          </div>
+          <div class="card-subtitle">Current Occupation</div>
+          <p class="card-text" style="font-size: 15px;">
+            {this.state.jobPosition} at {this.state.workPlaceOne}
+          </p>
+          <div>
+            Salary Range ( 0 - 300, 000 LKR)
+            <progress
+              color="success"
+              value="{Math.floor(Math.random()"
+              *
+              100)
+              +
+              1}
+            ></progress>
+          </div>
+          <br />
+          <br />
+          <div class="card-subtitle">Previous Job</div>
+          <p class="card-text">{this.state.workPlaceTwo}</p>
+          <div class="card-subtitle">Current Job</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

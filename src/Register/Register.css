@@ -7,12 +7,20 @@
   margin-top: 20px;
   vertical-align: middle;
 }
-.form-control {
+.form-control-register {
   width: 80%;
-  height: 100%;
   background-color: transparent;
   border: 1px solid #8c2634;
   border-radius: 80px;
+}
+
+.btn-register {
+  width: 20%;
+  background-color: #8c2634;
+  border-radius: 80px;
+  font-family: Campton;
+  color: white;
+  border: #8c2634;
 }
 
 .form-control-date {

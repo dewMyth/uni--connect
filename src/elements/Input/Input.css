@@ -1,0 +1,29 @@
+.formChat {
+  display: flex;
+  border-top: 2px solid #d3d3d3;
+}
+
+.inputChat {
+  border: none;
+  border-radius: 0;
+  padding: 1%;
+  width: 80%;
+  font-size: 1em;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.sendButton {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #8c2634;
+  padding: 20px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+  border-radius: 30px;
+}

@@ -48,9 +48,10 @@ class CreatePost extends Component {
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
 
-    // window.location.reload(true);
+    // window.location.href = "/dashboard";
   };
 
   render() {
@@ -81,13 +82,13 @@ class CreatePost extends Component {
               </div>
             </div>
             <div className="col-md-2">
-              <button type="submit" className="share-btn btn-primary share">
+              <button type="submit" className="share-btn btn-login share">
                 Share
               </button>
             </div>
             <div>
               <label
-                className="image btn btn-primary"
+                className="image btn btn-login"
                 onChange={this.onChangeImage}
               >
                 <input className="add-image" type="file" />

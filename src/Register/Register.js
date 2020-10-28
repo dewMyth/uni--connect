@@ -20,16 +20,16 @@ class Register extends Component {
       workPlaceOne: "",
       studentNo: "",
       degree: "",
-      selectedDegree: "",
       department: "",
-      selectedDepartment: "",
       faculty: "",
-      selectedFaculty: "",
       password: "",
       password2: "",
       errors: {},
+      degreeIds: [],
       degrees: [],
+      departmentIds: [],
       departments: [],
+      facultyIds: [],
       faculties: [],
     };
 
@@ -48,14 +48,14 @@ class Register extends Component {
       console.log(response.data);
       if (response.data.length > 0) {
         this.setState({
+          degreeIds: response.data.map((degree) => degree._id),
           degrees: response.data.map((degree) => degree.degreeTitle),
-          degreeTitle: response.data[0].degreeTitle,
+          departmentIds: response.data.map((degree) => degree.department._id),
           departments: response.data.map(
             (degree) => degree.department.departmentTitle
           ),
-          department: response.data[0].departmentTitle,
+          facultyIds: response.data.map((degree) => degree.faculty._id),
           faculties: response.data.map((degree) => degree.faculty.facultyTitle),
-          faculty: response.data[0].facultyTitle,
         });
       }
     });
@@ -74,14 +74,18 @@ class Register extends Component {
   onChangeSelect = (e) => {
     const targetDegree = e.target.value;
     const index = this.state.degrees.indexOf(targetDegree);
+    const selectedDegree = this.state.degreeIds[index];
     const targetDepartment = this.state.departments[index];
+    const selectedDepartment = this.state.departmentIds[index];
     const targetFaculty = this.state.faculties[index];
+    const selectedFaculty = this.state.facultyIds[index];
+    // this.input3.current.value = targetDegree;
     this.input.current.value = targetDepartment;
     this.input2.current.value = targetFaculty;
     this.setState({
-      degree: targetDegree,
-      department: targetDepartment,
-      faculty: targetFaculty,
+      degree: selectedDegree,
+      department: selectedDepartment,
+      faculty: selectedFaculty,
     });
   };
 
@@ -158,7 +162,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.firstName },
-                      "form-control"
+                      "form-control-register"
                     )}
                     value={this.state.firstName}
                     onChange={this.onChange}
@@ -177,7 +181,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.lastName },
-                      "form-control"
+                      "form-control-register"
                     )}
                     value={this.state.lastName}
                     onChange={this.onChange}
@@ -192,7 +196,7 @@ class Register extends Component {
 
               <div className="form-group">
                 <div className="reg row">
-                  <label className="btn btn-primary" style={{ width: "auto" }}>
+                  <label className="btn btn-register" style={{ width: "auto" }}>
                     <input
                       // className="form-control"
                       onChange={this.onChangeProfilePicture}
@@ -212,7 +216,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.email },
-                      "form-control"
+                      "form-control-register"
                     )}
                     value={this.state.email}
                     onChange={this.onChange}
@@ -231,7 +235,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.jobPosition },
-                      "form-control"
+                      "form-control-register"
                     )}
                     value={this.state.jobPosition}
                     onChange={this.onChange}
@@ -248,7 +252,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.workPlaceOne },
-                      "form-control"
+                      "form-control-register"
                     )}
                     value={this.state.workPlaceOne}
                     onChange={this.onChange}
@@ -268,7 +272,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.studentNo },
-                      "form-control"
+                      "form-control-register"
                     )}
                     value={this.state.studentNo}
                     onChange={this.onChange}
@@ -287,7 +291,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.degree },
-                      "form-control"
+                      "form-control-register"
                     )}
                     value={this.state.degree}
                     placeholder="Degree"
@@ -310,7 +314,7 @@ class Register extends Component {
               <div className="form-group">
                 <div className="reg row">
                   <input
-                    className="form-control"
+                    className="form-control-register"
                     type="text"
                     ref={this.input}
                     defaultValue={this.state.departments[0]}
@@ -321,7 +325,7 @@ class Register extends Component {
               <div className="form-group">
                 <div className="reg row">
                   <input
-                    className="form-control"
+                    className="form-control-register"
                     type="text"
                     ref={this.input2}
                     defaultValue={this.state.faculties[0]}
@@ -335,7 +339,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.password },
-                      "form-control"
+                      "form-control-register"
                     )}
                     type="password"
                     value={this.state.password}
@@ -354,7 +358,7 @@ class Register extends Component {
                     className={classnames(
                       "",
                       { invalid: errors.password2 },
-                      "form-control"
+                      "form-control-register"
                     )}
                     type="password"
                     value={this.state.password2}
@@ -368,14 +372,21 @@ class Register extends Component {
               </div>
 
               <div className="form-group">
-                <div className="button">
+                {/* <div className="button">
                   <input
                     type="submit"
                     value="Join"
                     className="btn btn-primary"
                     id="join"
                   />
-                </div>
+                </div> */}
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-register"
+                  id="join"
+                >
+                  Join
+                </button>
               </div>
 
               <div className="reg row">

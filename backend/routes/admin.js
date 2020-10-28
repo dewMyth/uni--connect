@@ -16,6 +16,17 @@ const adminBro = new AdminBro({
     companyName: "",
     softwareBrothers: false,
   },
+  pages: {
+    chartsPage: {
+      label: "Charts",
+      handler: async (request, response, context) => {
+        return {
+          text: "I am fetched from the backend",
+        };
+      },
+      component: AdminBro.bundle("../admin-components/charts"),
+    },
+  },
 });
 
 const ADMIN = {

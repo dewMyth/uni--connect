@@ -25,7 +25,7 @@ class Post extends Component {
     return (
       <div>
         {posts.map((post, index) => {
-          const posterId = post.postedBy ? post.postedBy._id : "No Id";
+          // const posterId = post.postedBy ? post.postedBy._id : "No Id";
           const posterFirstName = post.postedBy ? post.postedBy.firstName : "";
           const posterLastName = post.postedBy ? post.postedBy.lastName : "";
           const posterProfPic = post.postedBy
@@ -44,9 +44,10 @@ class Post extends Component {
                       <ReactTimeAgo date={post.created} locale="en" />
                     </i>
                   </div>
+
                   <div className="col-md-4 col-xs-4">
                     <Link
-                      to={`/profile/${posterId}`}
+                      to={`/users/${post.postedBy._id}`}
                       style={{
                         textDecoration: "none",
                         color: "black",
@@ -59,7 +60,6 @@ class Post extends Component {
                     </Link>
                   </div>
                   <div className="col-md-2 col-xs-4 col">
-                    {" "}
                     <img
                       src={posterProfPic}
                       alt=""

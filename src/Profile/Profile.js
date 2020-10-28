@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import EditProfile from "./EditProfile/EditProfile";
 import ViewProfile from "./ViewProfile/ViewProfile";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class Profile extends Component {
   render() {
@@ -11,7 +11,7 @@ class Profile extends Component {
     return (
       <Router>
         <div>
-          <Link to={`/edit/${this.props.user.id}`}>Edit Profile</Link>
+          {/* <Link to={`/edit/${this.props.user.id}`}>Edit Profile</Link> */}
           <Route
             path="/profile/:id"
             exact

@@ -15,10 +15,12 @@ class SinglePost extends Component {
     firstName: "",
     lastName: "",
     posterId: "",
+    profilePicture: "",
     //   created:
     comments: [],
     like: false,
     likes: 0,
+    deleted: false,
   };
 
   checkLike = (likes) => {
@@ -39,7 +41,8 @@ class SinglePost extends Component {
           postDescription: response.data.postDescription,
           firstName: response.data.postedBy.firstName,
           lastName: response.data.postedBy.lastName,
-          posterId: response.data.postedBy.id,
+          profilePicture: response.data.postedBy.profilePicture,
+          posterId: response.data.postedBy._id,
           likes: response.data.likes.length,
           like: this.checkLike(response.data.likes),
           comments: response.data.comments,
@@ -73,6 +76,19 @@ class SinglePost extends Component {
     });
   };
 
+  deletePost = () => {
+    axios
+      .delete("/posts/" + this.props.match.params.id)
+      .then((res) => console.log(res.data))
+      .then(
+        this.setState({
+          deleted: true,
+        })
+      );
+
+    window.location = "/dashboard";
+  };
+
   render() {
     return (
       <div className="container">
@@ -80,14 +96,16 @@ class SinglePost extends Component {
           <div className="card-body">
             <div className="row">
               <div className="col-md-6 col-xs-6">
-                <h3 className="card-title">{this.state.postTitle}</h3>
+                <h3 className="card-title" style={{ color: "#8c2634" }}>
+                  <b>{this.state.postTitle}</b>
+                </h3>
                 {/* <i>
                   <p>{new Date(post.created).toDateString()}</p>
                 </i> */}
               </div>
               <div className="col-md-4 col-xs-4">
                 <Link
-                  to={`/profile/${this.state.posterId}`}
+                  to={`/users/${this.state.posterId}`}
                   style={{
                     textDecoration: "none",
                     color: "black",
@@ -96,44 +114,71 @@ class SinglePost extends Component {
                     lineHeight: "40px",
                   }}
                 >
-                  <p>{`${this.state.firstName} ${this.state.lastName}`}</p>
+                  <p>
+                    <i>{`${this.state.firstName} ${this.state.lastName}`}</i>{" "}
+                  </p>
                 </Link>
               </div>
-              <div className="col-md-2 col-xs-4 col">
+              <div className="col-md-2 col-xs-4">
                 <img
-                  src={this.state.postImage}
-                  alt=""
+                  src={"/" + this.state.profilePicture}
                   width="45px"
                   height="auto"
                   style={{
                     borderRadius: "50px",
+                    marginBottom: "20px",
                   }}
+                  alt=""
                 />
               </div>
             </div>
-            <img className="card-img-top" src={this.state.postImage} alt="" />
-            {this.state.like ? (
-              <h5 onClick={this.likeToggle}>
-                <i
-                  className="fa fa-thumbs-up text-success"
-                  aria-hidden="true"
-                  style={{ padding: "10px" }}
-                />
-                <span className="badge badge-success">Liked</span>
-              </h5>
-            ) : (
-              <h5 onClick={this.likeToggle}>
-                <i
-                  className="fa fa-thumbs-up text-danger"
-                  aria-hidden="true"
-                  style={{ padding: "10px" }}
-                />
-                <span className="badge badge-danger">Like</span>
-              </h5>
-            )}
-            <p>{this.state.likes} Likes</p>
-            <p className="card-text">{this.state.postDescription}</p>
+            <img
+              className="card-img-top"
+              src={"/" + this.state.postImage}
+              alt=""
+            />
+            <hr />
+            <div className="row">
+              <div className="col-md-6">
+                {" "}
+                {this.state.like ? (
+                  <h5 onClick={this.likeToggle}>
+                    <i
+                      className="fa fa-thumbs-up text-success"
+                      aria-hidden="true"
+                      style={{ padding: "10px" }}
+                    />
+                    <span className="badge badge-success">Liked</span>
+                  </h5>
+                ) : (
+                  <h5 onClick={this.likeToggle}>
+                    <i
+                      className="fa fa-thumbs-up text-danger"
+                      aria-hidden="true"
+                      style={{ padding: "10px" }}
+                    />
+                    <span className="badge badge-danger">Like</span>
+                  </h5>
+                )}
+                <b>{this.state.likes} Likes</b>
+                <hr />
+                <p className="card-text">{this.state.postDescription}</p>
+              </div>
+              <div className="col-md-6" style={{ textAlign: "right" }}>
+                {" "}
+                {this.props.auth.user.id === this.state.posterId && (
+                  <>
+                    <Link to={`/posts/edit/${this.props.match.params.id}`}>
+                      Edit
+                    </Link>
+                    {"    "}
+                    <Link onClick={this.deletePost}>Delete</Link>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
+
           <Comment
             postId={this.props.match.params.id}
             comments={this.state.comments}

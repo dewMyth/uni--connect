@@ -9,15 +9,24 @@ import "./App.css";
 import Home from "./Home/Home";
 import Register from "./Register/Register";
 import Login from "./Login/Login";
+import ResetPassword from "./ResetPassword/ResetPassword";
+import NewPassword from "./NewPassword/NewPassword";
 import PrivateRoute from "./private-route/PrivateRoute";
 import Dashboard from "./Dashboard/Dashboard";
-import Faculty from "./Admin/Faculty/Faculty";
-import Department from "./Admin/Department/Department";
-import Degree from "./Admin/Degree/Degree";
+import SingleUserPublic from "./elements/SingleUser/SingleUserPublic";
+import PostByUser from "./PostsByUser/PostsByUser";
+import SingleDegree from "./elements/SingleDegree/SingleDegree";
+import SinglePost from "./elements/SinglePost/SinglePost";
+
 import Admin from "./Admin/Admin";
 import JavascriptTimeAgo from "javascript-time-ago";
+import ReactGa from "react-ga";
 
 import en from "javascript-time-ago/locale/en";
+
+import Daily from "./Admin/Daily/Daily";
+import Weekly from "./Admin/Weekly/Weekly";
+import Monthly from "./Admin/Monthly/Monthly";
 
 JavascriptTimeAgo.addLocale(en);
 
@@ -43,6 +52,10 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+  componentDidMount() {
+    ReactGa.initialize("UA-174976679-1");
+    ReactGa.pageview("/");
+  }
   render() {
     return (
       <Provider store={store}>
@@ -50,14 +63,19 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/register" exact component={Register} />
           <Route path="/login" exact component={Login} />
+          <Route path="/reset" exact component={ResetPassword} />
+          <Route path="/reset/:token" exact component={NewPassword} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
-
+          <Route path="/users/:id" exact component={SingleUserPublic} />
+          <Route path="/degrees/:id" exact component={SingleDegree} />
+          <Route path="/posts/by/:id" exact component={PostByUser} />
+          <Route path="/posts/:id" exact component={SinglePost} />
           <Route path="/admin/" exact component={Admin} />
-          <Route path="/admin/faculties" exact component={Faculty} />
-          <Route path="/admin/departments" exact component={Department} />
-          <Route path="/admin/degrees" exact component={Degree} />
+          <Route path="/admin/monthly" exact component={Monthly} />
+          <Route path="/admin/weekly" exact component={Weekly} />
+          <Route path="/admin/daily" exact component={Daily} />
         </Router>
       </Provider>
     );

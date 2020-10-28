@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import Messages from "../elements/Messages/Message";
 class ChatOnline extends Component {
   state = {
     users: [],
@@ -40,7 +39,7 @@ class ChatOnline extends Component {
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
                   {user.firstName} {user.lastName}{" "}
-                  <span class="badge badge-success">Online</span>
+                  <span className="badge badge-success">Online</span>
                   <p style={{ color: "grey", fontSize: "11px" }}>
                     {user.jobPosition}
                     <br />
@@ -63,3 +62,50 @@ class ChatOnline extends Component {
 }
 
 export default ChatOnline;
+
+// import React, { useEffect, useState } from "react";
+// import io from "socket.io-client";
+// import TextContainer from "../TextContainer/TextContainer";
+
+// let socket;
+
+// const Chat = ({ location }) => {
+//   const [name, setName] = useState("");
+//   const [room, setRoom] = useState("");
+//   const [users, setUsers] = useState("");
+//   // const [message, setMessage] = useState("");
+//   // const [messages, setMessages] = useState([]);
+//   const ENDPOINT = "localhost:5000";
+
+//   useEffect(() => {
+//     socket = io(ENDPOINT);
+
+//     setName(name);
+//     setRoom(room);
+
+//     socket.emit("join", { name, room }, () => {});
+
+//     return () => {
+//       socket.emit("disconnect");
+//       socket.off();
+//     };
+//   }, [ENDPOINT]);
+
+//   useEffect(() => {
+//     socket.on("roomData", ({ users }) => {
+//       setUsers(users);
+//     });
+//   }, []);
+
+//   // console.log(message, messages);
+
+//   return (
+//     <div className="container" style={{ height: "100vh", textAlign: "center" }}>
+//       <div>
+//         <TextContainer users={users} />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Chat;

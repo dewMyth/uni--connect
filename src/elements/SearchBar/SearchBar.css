@@ -17,6 +17,10 @@
   width: 70%;
 }
 
+.list-group {
+  width: 60%;
+}
+
 .search-input:focus {
   color: #8c2634;
 }

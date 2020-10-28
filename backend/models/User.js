@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+// const Degree = require("../models/Degree");
 
 // Create Schema
 const UserSchema = new Schema({
@@ -13,7 +14,7 @@ const UserSchema = new Schema({
   },
   dateOfBirth: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   profilePicture: {
     type: String,
@@ -45,14 +46,16 @@ const UserSchema = new Schema({
     required: true,
   },
   degree: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "degrees",
   },
   department: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "departments",
   },
   faculty: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "faculties",
   },
 
   bio: {
@@ -61,6 +64,20 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  resetToken: {
+    type: String,
+  },
+  expireToken: {
+    type: Date,
+  },
+
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
+
+  created: {
+    type: Date,
+    default: Date.now,
   },
 });
 
